@@ -1,0 +1,122 @@
+/* Conteneur principal du formulaire d'inscription */
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+/* Conteneur du formulaire et de l'image */
+.signup-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  gap: 40px; /* ✅ Space between form and image */
+}
+
+/* Image de gauche */
+.signup-image-container {
+  flex: 1;
+  text-align: left;
+}
+
+.signup-image {
+  max-width: 380px;
+  width: 100%;
+  height: 600px auto;
+  transition: filter 0.5s ease;
+}
+
+.signup-image:hover {
+  filter: grayscale(60%);
+}
+
+/* Formulaire à droite */
+.signup-form {
+  flex: 1;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  transition: transform 0.5s ease; 
+}
+
+.signup-form:hover {
+  transform: scale(1.05);
+}
+
+/* Champs de formulaire */
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #8ca6ab;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 5px;
+  background-color: #f4f4f4;
+}
+
+/* Bouton de soumission */
+button[type="submit"] {
+  padding: 10px;
+  font-size: 1rem;
+  color: white;
+  background-color: #8ca6ab;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #7a9299;
+}
+
+/* Section du bas alignée en colonnes */
+.signup-footer {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.footer-columns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.newsletter-subscription,
+.quick-links,
+.legal-links,
+.contact-info {
+  flex: 1;
+  padding: 0 15px;
+}
+
+h2,
+h3,
+h4 {
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  text-decoration: underline;
+}

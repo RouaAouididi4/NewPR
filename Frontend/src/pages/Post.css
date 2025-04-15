@@ -1,0 +1,716 @@
+/* Post.css */
+
+/* Conteneur principal */
+.Post {
+  background-color: #d9d9d9;
+}
+
+/* Section avec l'image de fond */
+.background-text {
+  background-image: url("../pages/images/Post1.jpg"); /* Assurez-vous que le chemin est correct */
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding: 400px;
+
+  /* background-attachment: local; */
+  background-size: 100% 100%;
+  position: relative;
+  margin: 0 20px;
+  max-width: 2200px;
+  box-sizing: border-box;
+}
+.line {
+  height: 1px; /* Thickness of the line */
+  background-color: rgb(192, 219, 226); /* Color of the line */
+  /* border: none; */
+  top: 380px;
+  bottom: 0;
+  height: 1px;
+  width: 80%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* position: relative; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: top; */
+}
+
+.for-sale-frame {
+  position: absolute;
+  top: 300px; /* Ajustez la position verticale */
+  right: 10px; /* Ajustez la position horizontale */
+  background-color: rgba(22, 77, 89, 0.6); /* Fond semi-transparent bleu-vert */
+  padding: 20px; /* Espace intérieur */
+  width: 550px; /* Augmenter la largeur */
+  height: 20px;
+  text-align: center; /* Centrer le texte */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour le relief */
+  border: 0px solid rgba(255, 255, 255, 0.5); /* Bordure blanche semi-transparente */
+
+  /* Forme personnalisée avec clip-path */
+  clip-path: polygon(0 100%, 100% 100%, 100% 0, 20% 0);
+}
+
+.for-sale-frame h1 {
+  margin: 0; /* Supprimer la marge par défaut */
+  font-size: 20px; /* Taille de la police */
+  color: #ffffff; /* Texte en blanc */
+  font-weight: bold; /* Texte en gras */
+  text-transform: unset; /* Texte en majuscules */
+  font-family: "Arial", sans-serif; /* Police optionnelle */
+}
+
+/* Conteneur des zones de texte et du bouton */
+.input-container {
+  position: relative;
+  /* display: flex; */
+  /* gap: 15px; */
+  /* margin-bottom: 5px; */
+  top: 50%;
+  left: 10%;
+  transform: translate(-50%, 10%);
+  padding: 20px;
+  border-radius: 0px;
+  width: 850px;
+}
+
+/* Ligne d'entrées */
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.input-row input {
+  flex: 1;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  border-radius: 0px;
+  font-size: 18px;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.6
+  ); /* Fond semi-transparent bleu-vert */
+}
+
+.location-check {
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.location-question {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-right: 20px;
+}
+
+.yes-button {
+  padding: 10px 15px;
+  border: 1px solid #ffffff;
+  border-radius: 0px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: rgb(121, 117, 103);
+}
+
+.no-button {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 0px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+}
+
+.yes-button {
+  color: white;
+  border-color: rgb(121, 117, 103);
+}
+
+.no-button {
+  color: rgb(121, 117, 103);
+  border-color: rgb(121, 117, 103);
+}
+
+.yes-button:hover {
+  background-color: #ffffff;
+  color: rgb(121, 117, 103);
+}
+
+.no-button:hover {
+  background-color: rgb(121, 117, 103);
+  color: rgb(255, 255, 255);
+}
+
+/* Bouton Continue */
+/* Conteneur principal du bouton - centré avec une marge en haut */
+.continue-button-container {
+  text-align: center; /* Centre le contenu horizontalement */
+  margin-top: 20px; /* Ajoute un espace de 20px en haut */
+  position: relative;
+}
+
+/* Style du texte "Contine" au-dessus du bouton */
+.contine-text {
+  display: block; /* Affiche comme un bloc (prend toute la largeur) */
+  font-size: 26px; /* Taille de police */
+  font-weight: bold; /* Police en gras */
+  margin-bottom: 10px; /* Espace de 8px sous le texte */
+  color: #000; /* Couleur noire */
+  font-family: "Georgia", serif;
+  position: absolute;
+}
+
+/* Style de base du bouton */
+.continue-button-container button {
+  position: relative; /* Nécessaire pour positionner les pseudo-éléments */
+  padding: 10px 20px; /* Espacement intérieur (haut/bas gauche/droite) */
+  background: transparent; /* Fond transparent (sera remplacé par les pseudo-éléments) */
+  color: white; /* Couleur du texte */
+  font-weight: bold; /* Police en gras */
+  font-size: 19px; /* Taille de police */
+  border: none; /* Pas de bordure */
+  cursor: pointer; /* Curseur en forme de main au survol */
+  text-transform: capitalize; /* Première lettre en majuscule */
+  font-family: "Georgia", serif; /* Police spécifique */
+  overflow: hidden;
+  margin-right: 20px; /* Cache ce qui dépasse (pour les pseudo-éléments) */
+}
+
+/* Pseudo-élément pour la partie bleue (droite) */
+.continue-button-container button::before {
+  content: ""; /* Nécessaire pour les pseudo-éléments */
+  position: absolute; /* Position absolue par rapport au bouton */
+  top: 0; /* Collé en haut */
+  right: 0; /* Collé à droite */
+  width: 70%; /* Prend 50% de la largeur */
+  height: 100%; /* Prend 100% de la hauteur */
+
+  /* Correction de l'inclinaison */
+  clip-path: polygon(100% 0, 100% 100%, 10% 100%, 60% 0);
+
+  background-color: rgba(22, 77, 89, 0.8); /* Bleu semi-transparent */
+  z-index: -1; /* Place derrière le texte du bouton */
+}
+
+/* Pseudo-élément pour la partie transparente (gauche) */
+.continue-button-container button::after {
+  content: ""; /* Nécessaire pour les pseudo-éléments */
+  position: absolute; /* Position absolue par rapport au bouton */
+  top: 0; /* Collé en haut */
+  left: 0; /* Collé à gauche */
+  width: 50%; /* Prend 50% de la largeur */
+  height: 100%; /* Prend 100% de la hauteur */
+  /* Fond transparent */
+  z-index: -1; /* Place derrière le texte du bouton */
+}
+
+/* Effet au survol - change seulement la partie bleue */
+.continue-button-container button:hover::before {
+  background-color: #214e52; /* Nouvelle couleur bleue plus foncée */
+}
+
+/* Conteneur principal */
+.container {
+  text-align: center;
+  width: 80%;
+  max-width: 1500px;
+  /* margin: auto; */
+}
+
+/* Section principale */
+.listing-box {
+  background-color: #bdc1c3;
+  border: 1px solid #939087;
+
+  padding: 10px;
+  border-radius: 0px;
+  text-align: left;
+  margin-bottom: 40px;
+}
+
+.listing-box h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-family: "EB Garamond";
+  color: #ffffff;
+}
+/* Section du prix */
+
+.price-box {
+  display: flex;
+  align-items: center;
+  background-color: #bdc1c3;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 400px;
+}
+
+.price-label {
+  font-weight: bold;
+  color: #003049;
+  margin-right: 10px;
+}
+
+.price-input-box {
+  display: flex;
+  align-items: right;
+  background-color: #bcb8b1;
+  border-radius: 5px;
+  padding: 8px 29px;
+}
+
+.price-input {
+  border: 12px black;
+  background: transparent;
+  padding: 5px;
+  text-align: left;
+
+  width: 60px;
+  outline: none;
+}
+
+.price-currency {
+  font-weight: bold;
+
+  color: #003049;
+  margin-left: 5px;
+}
+
+/* Libellé "Set Your Price :" */
+.price-label {
+  font-family: "EB Garamond", serif;
+
+  font-size: 30px;
+  color: #0a3842;
+  padding-left: 20px;
+}
+
+/* Champ de prix */
+.price-value {
+  background-color: #989591;
+  color: white;
+  padding: 10px;
+  border-radius: 0px;
+  font-weight: bold;
+  text-align: right;
+  flex-grow: 1; /* Permet d'étendre la largeur dynamiquement */
+  /* max-width: 400px; Ajuste la largeur maximale pour qu'elle corresponde à l'image */
+  min-height: 20px;
+}
+
+.photos-section {
+  background-color: #bdc1c3;
+  padding: 19px;
+  border: 1px solid #939087;
+
+  margin-top: 40px;
+  /* margin-bottom: 30px; */
+  width: 100vw;
+  /* margin: auto; */
+  text-align: left;
+}
+
+.photos-section h2 {
+  color: #002b36;
+  font-family: "EB Garamond", serif;
+  font-size: 28px;
+}
+
+.photos-section p {
+  color: #2d190a;
+  font-size: 16px;
+  font-family: "EB Garamond";
+  font-weight: bold;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+/* Reset */
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.photo-upload-area {
+  background-color: #ffffff;
+  padding: 20px 15px;
+
+  border: 1px solid #c0c2c3;
+  margin-bottom: -100px;
+  text-align: center;
+}
+
+.blob-btn {
+  z-index: 1;
+  position: relative;
+  padding: 10px 26px;
+  margin-bottom: 1px;
+  text-align: center;
+
+  color: #5a3c13; /* Cyan color */
+  font-size: 16px;
+
+  background-color: transparent;
+  outline: none;
+  border: none;
+  transition: color 0.5s;
+  cursor: pointer;
+  border-radius: 0px;
+}
+
+.blob-btn::before {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #5a3c13; /* Cyan color */
+  border-radius: 0px;
+}
+
+.blob-btn:hover {
+  color: #ffffff; /* Change color on hover */
+}
+
+.blob-btn:hover::before {
+  border-radius: 0px;
+}
+
+/* Blob effect */
+.blob-btn__inner {
+  z-index: -1;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+  background: #ffffff;
+}
+
+.blob-btn__blobs {
+  position: relative;
+  display: block;
+  height: 170%;
+
+  filter: url("#goo");
+}
+
+.blob-btn__blob {
+  position: absolute;
+  top: 0px;
+  width: 35%;
+  height: 80%;
+  background: #5a3c13; /* Cyan color */
+  border-radius: 100%;
+  transform: translate3d(0, 150%, 0) scale(1.7);
+  transition: transform 0.45s;
+}
+
+.blob-btn:hover .blob-btn__blob {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.blob-btn__blob:nth-child(1) {
+  left: 0%;
+  transition-delay: 0s;
+}
+
+.blob-btn__blob:nth-child(2) {
+  left: 25%;
+  transition-delay: 0.1s;
+}
+
+.blob-btn__blob:nth-child(3) {
+  left: 50%;
+  transition-delay: 0.2s;
+}
+
+.blob-btn__blob:nth-child(4) {
+  left: 75%;
+  transition-delay: 0.3s;
+}
+
+.photo-upload-button {
+  background-color: #b0a9a6;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 0px;
+}
+
+.photo-upload-button:hover {
+  background-color: #604c3d;
+  color: #5a7c87;
+}
+
+.photos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.photo-item {
+  position: relative;
+
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(221, 220, 220, 0.2);
+}
+
+.photo-item img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgb(253, 6, 6);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.delete-button:hover {
+  background-color: rgb(64, 1, 1);
+}
+
+.listing-form {
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: center;
+
+  background-image: url("./images/jnina.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; /* Couvre toute la zone */
+  background-position: center; /* Centre l'image */
+  background-attachment: fixed; /* Optionnel - effet parallaxe */
+  padding: 20px 20px;
+  min-height: 100vh; /* Prend toute la hauteur d'écran */
+  font-family: "EB Garamond", serif;
+  position: relative; /* Pour le pseudo-élément */
+  color: #fff; /* Couleur texte pour contraste */
+  text-align: center;
+}
+
+/* Couche de superposition pour meilleure lisibilité */
+.listing-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(147, 147, 147, 0.5); /* Noir avec 50% d'opacité */
+  z-index: 0;
+}
+
+/* Contenu par-dessus la couche */
+.listing-form > * {
+  position: relative;
+  z-index: 1;
+}
+
+.listing-form h2 {
+  font-size: 24px;
+  /* margin-bottom: 20px; */
+  color: #4c3e3e;
+}
+.facts {
+  text-align: right;
+  color: #002b36;
+  font-family: "EB Garamond";
+  font-weight: bold;
+  font-size: 26px;
+}
+.listing-form h3 {
+  font-size: 18px;
+  margin: 25px 0 15px 0;
+  color: #333;
+  font-weight: bold;
+}
+
+.form-section {
+  font-weight: bold;
+  font-size: 20px;
+
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row .form-section {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.form-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-section input[type="text"],
+.form-section input[type="number"],
+.form-section input[type="url"],
+.form-section input[type="tel"],
+.form-section select,
+.form-section textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-section textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.info-text {
+  color: #444444;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+.agreement-checkbox-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #14485b;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  /* background-position: center; */
+}
+
+.agreement-content {
+  flex: 1;
+  justify-content: center;
+}
+
+.agreement-content h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #000000;
+  text-align: left;
+}
+
+.agreement-list {
+  padding-left: 20px;
+  margin-bottom: 0px;
+  text-align: left;
+}
+
+.agreement-list li {
+  color: #000000;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.marketing-consent {
+  font-size: 13px;
+  color: #090909;
+  line-height: 1.5;
+  margin-top: 10px;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  accent-color: #0066ff;
+}
+
+.checkbox-wrapper label {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .agreement-checkbox-container {
+    padding: 15px;
+    margin: 15px;
+  }
+
+  .checkbox-wrapper {
+    margin-left: 0;
+  }
+}
+.full-width-banner {
+  width: 100%;
+  background-image: url("./images/p2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 20px;
+  color: white;
+  margin: 40px 0;
+}
+
+.banner-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}

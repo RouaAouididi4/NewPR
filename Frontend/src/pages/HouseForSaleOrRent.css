@@ -1,0 +1,30 @@
+.features-container {
+    display: flex;
+    align-items: center; /* Aligne verticalement les éléments au centre */
+    justify-content: flex-start; /* Aligne les éléments à gauche */
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .features-title {
+    font-size: 24px;
+    margin: 0; /* Supprime la marge par défaut du h2 */
+    margin-right: 20px; /* Ajoute un espace entre le titre et le bouton */
+  }
+  
+  .browse-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #164D59;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .browse-button:hover {
+    background-color: #2a3036;
+    
+
+  }
+  

@@ -1,0 +1,294 @@
+/* Container styling */
+.property-listing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Section heading */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Tabs for Rent and Sale */
+.listing-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.listing-tabs button {
+  background-color: #164d59;
+  color: white;
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.listing-tabs button.active {
+  background-color: #164d59;
+  color: white;
+}
+
+/* Search filters */
+.search-filters {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  flex: 10px;
+}
+
+.filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-group input,
+.filter-group select {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Property List */
+.property-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Individual Property Item */
+.property-item {
+  max-width: 300px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  border: 1px solid #ddd;
+  transition: transform 0.2s;
+}
+
+.property-item:hover {
+  transform: scale(1.05);
+}
+
+.property-item .listing-img {
+  width: 100%;
+  height: auto;
+}
+
+.property-item .p-4 {
+  padding: 16px;
+}
+
+.property-item h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.property-item p {
+  color: #555;
+  font-size: 14px;
+}
+
+.property-item .text-sm {
+  font-size: 12px;
+}
+
+.property-item .text-2xl {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.property-item button {
+  background: none;
+  border: none;
+  color: #ff0000;
+  cursor: pointer;
+}
+
+.property-item button:hover {
+  color: #cc0000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .property-list {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 50vh; /* Adjust based on your design */
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.hero-container .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.3
+  ); /* Dark overlay for better readability */
+}
+
+.hero-container .content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.hero-container .buttons {
+  margin-top: 15px;
+}
+
+.hero-container .btn {
+  background-color: white;
+  color: black;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0 5px;
+}
+.footer {
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.description {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.newsletter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.newsletter input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+}
+
+.newsletter button {
+  background-color: #164d59;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.footer-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  color: #555;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.footer-section ul li:hover {
+  color: #007bff;
+}
+
+.contact-info li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.footer-bottom a {
+  text-decoration: none;
+  color: #164d59;
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+.search-button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+}

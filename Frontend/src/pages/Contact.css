@@ -1,0 +1,158 @@
+/* Contact Area */
+.south-contact-area {
+  padding: 80px 0;
+  background-color: #f9fafb; /* Light background color */
+}
+
+/* Sidebar (Infos de contact) */
+.section-title {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-bottom: 3px solid #eaf5f7; /* Darker border for a professional touch */
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+  color: #5a5345;
+}
+
+.weekly-office-hours ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.weekly-office-hours ul li {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  color: #555; /* Darker color for readability */
+}
+
+.address p {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.address p svg {
+  margin-right: 12px;
+  color: #2e4f56; /* Match color theme */
+  min-width: 24px; /* Adjust the icon size */
+}
+
+/* Contact Form */
+.contact-form {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 15%;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin: 5px;
+}
+
+/* Form Control */
+.form-control {
+  width: 100%;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 1rem;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #2e4f56;
+  box-shadow: 0 0 8px rgba(46, 79, 86, 0.3);
+  outline: none;
+}
+
+textarea.form-control {
+  resize: vertical;
+}
+
+/* Submit Button */
+.btn.south-btn {
+  background-color: #2e4f56;
+  color: white;
+  border: none;
+  padding: 14px 35px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn.south-btn:hover {
+  background-color: #423f1a;
+  transform: translateY(-2px); /* Add hover lift effect */
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .content-sidebar {
+    margin-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contact-form {
+    padding: 35px 25px;
+  }
+
+  .address p {
+    font-size: 1rem; /* Adjust font size for readability on smaller screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-form {
+    padding: 25px 15px;
+  }
+
+  .btn.south-btn {
+    width: 100%; /* Make the button full width on small screens */
+    padding: 15px 0;
+  }
+
+  /* Reduce margins on smaller screens */
+  .weekly-office-hours ul li {
+    padding: 10px 5px;
+  }
+
+  .address p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Image Section (Responsiveness) */
+.contact-page .img-fluid {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.contact-page .img-fluid:hover {
+  transform: scale(1.05); /* Add zoom effect on hover */
+}
+
+/* Map Area */
+.map-area iframe {
+  border: 0;
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin: 10px;
+}
+
+.map-area iframe:hover {
+  transform: scale(1.02); /* Slight zoom effect on hover */
+}

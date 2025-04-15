@@ -1,0 +1,365 @@
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.services-title,
+.testimonials-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.service-intro {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.service-images {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.service-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  background-position: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-size: cover;
+  background-position: center;
+}
+
+.service-image-1 {
+  background-image: url("./images/Services1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  margin: 0;
+}
+
+.service-image-2 {
+  background-image: url("./images/Services2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 50vh;
+  margin: auto;
+}
+
+.service-details {
+  background-color: #dfebed;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+.service-list {
+  font-size: 2rem;
+  text-align: left;
+}
+
+.service-heading {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+  background-color: #c1d9df;
+}
+
+.service-text {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.testimonials {
+  background-color: #eef5f9;
+  padding: 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.testimonial-text {
+  font-size: 1.2rem;
+  color: #333;
+  font-style: italic;
+}
+
+.testimonial-author {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 10px;
+}
+
+.testimonial-image {
+  background-image: url("./images/Services3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 70vh;
+  margin: 0;
+}
+
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.footer-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.footer-text {
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.footer-image {
+  width: 100%;
+  height: 200px;
+  margin-top: 20px;
+  border-radius: 8px;
+  background-image: url("./images/Services4.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.newsletter-subscription,
+.quick-links,
+.legal-links,
+.contact-info {
+  flex: 1;
+  padding: 0 15px;
+}
+
+h2,
+h3,
+h4 {
+  color: #333;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #422101d1;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+/* Services.css */
+
+
+/* Newsletter Section */
+.bg-brown {
+  background-color: #A59D84; /* Brown color */
+  transition: transform 0.6s ease; /* Enable smooth scale */
+  height: 600px;
+  border: 2px solid black;
+}
+
+.bg-brown:hover {
+  transform: scale(1.02); /* Slight zoom on hover */
+}
+
+.newsletter-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-subtitle {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #ddd;
+  margin-bottom: 2rem;
+}
+
+.newsletter-input {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 25px 0 0 25px;
+}
+
+.newsletter-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 0 25px 25px 0;
+  background-color: #f7a100; /* Light accent color */
+  color: white;
+  border: none;
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+.newsletter-btn:hover {
+  background-color: #e68a00;
+  transform: scale(1.05); /* Slightly enlarges the button */
+}
+
+.news-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.news-title + ul {
+  list-style: none;
+  padding: 0;
+}
+
+.news-title + ul li {
+  margin-bottom: 1rem;
+}
+
+.news-title + ul li a {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+}
+
+.news-title + ul li a:hover {
+  text-decoration: underline;
+}
+
+.news-title + ul li p {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+/* Footer Section */
+.extra-sections {
+  background-color: #333;
+  color: #fff;
+  padding: 3rem 0;
+}
+
+.extra-sections h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.extra-sections p, .extra-sections a {
+  font-size: 1rem;
+  color: #ccc;
+}
+
+.extra-sections a:hover {
+  color: #f7a100;
+}
+
+.extra-sections .newsletter-subscription p {
+  font-size: 1.1rem;
+}
+
+.extra-sections .quick-links ul, .extra-sections .legal-links ul {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.extra-sections .quick-links ul li, .extra-sections .legal-links ul li {
+  margin-bottom: 0.5rem;
+}
+
+.extra-sections .contact-info p {
+  font-size: 1rem;
+}
+.box{
+  background-color: #b0a18d18;
+
+}
+/* Footer */
+footer {
+  background-color: #000;
+  color: #fff;
+  padding: 50px 20px 30px 20px;
+  margin: 0;
+  font-size: 14px;
+}
+
+footer h2,
+footer h5 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+footer p {
+  color: #ccc;
+  margin-bottom: 20px;
+}
+
+footer .form-control {
+  border: none;
+  border-radius: 4px;
+}
+
+footer .btn-outline-light {
+  border-color: #fff;
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+footer .btn-outline-light:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
+
+footer a {
+  text-decoration: none;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: #fff;
+}
+
+/* Social Icons */
+footer .social-icons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+footer .social-icons a {
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+footer .social-icons a:hover {
+  color: #ccc;
+}
+
+/* Contact Info */
+footer .fa-map-marker-alt,
+footer .fa-phone,
+footer .fa-envelope {
+  margin-right: 8px;
+}
