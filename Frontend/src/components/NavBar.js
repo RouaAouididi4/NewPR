@@ -25,18 +25,19 @@ const Navbar = () => {
   return (
     <header className="header">
       {/* Top Bar */}
-      <div className="top-bar">
-        <div className="container">
-          <a href="mailto:contact@southernplate.com" className="email">
-            CasaTech@gmail.com
-          </a>
-          <div className="phone">
-            <div className="phone-icon"></div>
-            <a href="tel:+456775993000223">+216 ** *** ***</a>
+      {!scrolled && (
+        <div className="top-bar">
+          <div className="container">
+            <a href="mailto:contact@southernplate.com" className="email">
+              CasaTech@gmail.com
+            </a>
+            <div className="phone">
+              <div className="phone-icon"></div>
+              <a href="tel:+456775993000223">+216 ** *** ***</a>
+            </div>
           </div>
         </div>
-      </div>
-
+      )}
       {/* Main Navbar */}
       <nav className={`navbar ${scrolled ? "scrolled" : ""}`}>
         <div className="container">
@@ -54,22 +55,17 @@ const Navbar = () => {
               HOME
             </a>
 
-            <div className="dropdown">
-              <button className="menu-item">
-                PAGES <span className="arrow">▼</span>
-              </button>
-              <div className="dropdown-content">
-                <a href="/about">About</a>
-                <a href="/listings">Listings</a>
-                <a href="/contact">Contact</a>
-              </div>
-            </div>
-
+            <a href="/Services" className="menu-item">
+              Services
+            </a>
+            <a href="/upload" className="menu-item">
+              upload
+            </a>
             <a href="/about" className="menu-item">
               ABOUT US
             </a>
-            <a href="/properties" className="menu-item">
-              PROPERTIES
+            <a href="/Post" className="menu-item">
+              POST
             </a>
             <a href="/blog" className="menu-item">
               BLOG
@@ -91,15 +87,24 @@ const Navbar = () => {
             <a href="/contact" className="menu-item">
               CONTACT
             </a>
+            {/* <a href="/Details" className="menu-item">
+              Details
+            </a> */}
           </div>
-
+          <div className="auth-links">
+            <a href="/login" className="menu-item">
+              LOGIN
+            </a>
+            <a href="/signup" className="menu-item signup">
+              SIGNUP
+            </a>
+          </div>
           {/* Bouton Menu Mobile */}
           <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
             ☰
           </button>
         </div>
       </nav>
-
       {/* Styles */}
       <style jsx>{`
         .header {
@@ -113,17 +118,8 @@ const Navbar = () => {
         .top-bar {
           background-color: #000;
           color: white;
-          padding: 8px 0;
-          font-size: 14px;
-        }
-
-        .container {
-          width: 90%;
-          max-width: 1200px;
-          margin: 0 auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
+          padding: -0px;
+          font-size: 13px;
         }
 
         .email,
@@ -171,13 +167,23 @@ const Navbar = () => {
         }
 
         .navbar {
-          padding: 15px 0;
+          padding: 0px 0;
           background-color: transparent;
           transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
           background-color: #000;
+        }
+        .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          max-width: 1400px;
+          margin: 0 auto;
+          width: 100%;
+          padding: 5 15px;
+          position: relative;
         }
 
         .logo {
@@ -190,7 +196,10 @@ const Navbar = () => {
 
         .menu {
           display: flex;
-          gap: 25px;
+          gap: 20px;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
         }
 
         .menu-item {
@@ -215,7 +224,24 @@ const Navbar = () => {
           margin-left: 5px;
           font-size: 10px;
         }
+        /* Right-aligned Auth Links */
+        .auth-links {
+          display: flex;
+          gap: 15px;
+          align-items: center;
+        }
 
+        .auth-links .menu-item.signup {
+          padding: 8px 15px;
+          background-color: #fff;
+          color: #000;
+          border-radius: 4px;
+        }
+
+        .auth-links .menu-item.signup:hover {
+          background-color: #ddd;
+          color: #000;
+        }
         /* Dropdown Menu */
         .dropdown {
           position: relative;
@@ -247,48 +273,6 @@ const Navbar = () => {
 
         .dropdown-content a:hover {
           background-color: #333;
-        }
-
-        /* Mega Menu */
-        .mega-menu {
-          position: relative;
-        }
-
-        .mega-menu-content {
-          display: none;
-          position: absolute;
-          right: 0;
-          background-color: #000;
-          width: 800px;
-          padding: 20px;
-          z-index: 1;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 20px;
-        }
-
-        .mega-menu:hover .mega-menu-content {
-          display: grid;
-        }
-
-        .mega-column {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .mega-column h3 {
-          color: white;
-          margin-bottom: 15px;
-          font-size: 16px;
-        }
-
-        .mega-column a {
-          color: #ccc;
-          padding: 5px 0;
-          text-decoration: none;
-        }
-
-        .mega-column a:hover {
-          color: white;
         }
 
         /* Mobile Menu */
@@ -335,7 +319,7 @@ const Navbar = () => {
             display: none;
           }
         }
-      `}</style>
+      `}</style>{" "}
     </header>
   );
 };

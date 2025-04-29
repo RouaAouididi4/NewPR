@@ -1,3 +1,4 @@
+const { mongo } = require("mongoose");
 const Property = require("../Models/PropertiesModel");
 const catchAsync = require("../Utils/CatchAsync");
 
@@ -10,24 +11,24 @@ exports.getAllProperties = catchAsync(async (req, res, next) => {
 // Get a property by ID
 exports.searchProperties = async (req, res) => {
   try {
-    const { address, type, minPrice, maxPrice, bedrooms, minSize, maxSize } =
-      req.query;
+    const {
+      streetAddress,
+      type,
+      minPrice,
+      maxPrice,
+      bedrooms,
+      minSize,
+      maxSize,
+    } = req.query;
     const query = {};
 
-    if (address) query.address = { $regex: address, $options: "i" };
-    if (type) query.type = type;
-    if (minPrice || maxPrice) {
-      query.price = {};
-      if (minPrice) query.price.$gte = Number(minPrice);
-      if (maxPrice) query.price.$lte = Number(maxPrice);
-    }
-    if (bedrooms) query.bedrooms = Number(bedrooms);
-    if (minSize || maxSize) {
-      query.size = {};
-      if (minSize) query.size.$gte = Number(minSize);
-      if (maxSize) query.size.$lte = Number(maxSize);
-    }
+    console.log(req.body);
 
+    if (!address || !propertyID) {
+      return res
+        .status(400)
+        .json({ message: "Address and PropertyID are required" });
+    }
     const properties = await Property.find(query);
     res.status(200).json({
       status: "success",
@@ -42,25 +43,36 @@ exports.searchProperties = async (req, res) => {
 };
 
 // Create a new property
-exports.createProperty = catchAsync(async (req, res, next) => {
-  const { address, type, price, size, bedrooms, status, management } = req.body;
+exports.createProperty = catchAsync(async (req, res) => {
+  const {
+    streetAddress,
+    type,
+    price,
+    title,
+    size,
+    bedrooms,
+    bathrooms,
+
+    management,
+  } = req.body;
 
   // Create a new property with the status and management specified by the customer
   const newProperty = await Property.create({
-    address,
+    streetAddress,
     type,
     price,
+    title,
     size,
     bedrooms,
-    status: status || "pending", // 'online' or 'pending' or 'managing'
-    management: management || "unmanaged", // 'managed' or 'unmanaged'
+    bathrooms,
+    management: management || "Unmanaged", // 'managed' or 'unmanaged',
   });
 
-  res.status(201).json({ status: "success", data: newProperty });
+  res.status(201).json({ message: "Listing added ✅", property: newProperty });
 });
 
 // Update a property
-// Update a property
+
 exports.updateProperty = catchAsync(async (req, res, next) => {
   const { status, management } = req.body;
 
@@ -68,7 +80,6 @@ exports.updateProperty = catchAsync(async (req, res, next) => {
   const updatedProperty = await Property.findByIdAndUpdate(
     req.params.id,
     {
-      status: status || undefined, // If status is provided, update it
       management: management || undefined, // If management is provided, update it
       // You can also add other fields if needed
     },
@@ -91,8 +102,18 @@ exports.deleteProperty = catchAsync(async (req, res, next) => {
   await Property.findByIdAndDelete(req.params.id);
   res.status(204).json({ status: "success", data: null });
 });
+
 exports.getPropertyById = catchAsync(async (req, res, next) => {
-  const property = await Property.findById(req.params.id);
+  const { id } = req.params;
+
+  if (!mongoose.types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      status: "error",
+      message: "Invalid property ID format",
+    });
+  }
+
+  const property = await Property.findById(id);
   if (!property) {
     return res
       .status(404)

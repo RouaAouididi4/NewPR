@@ -1,223 +1,57 @@
-/* PropertyByLocation.css */
-
-.property-listing-container {
-  font-family: Arial, sans-serif;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+.hero-section {
+  
+  height: 100vh; 
+  position: relative;
+  margin-left: -190px;
+  margin-right: -170px;
 }
 
-.search-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.search-bar {
-  display: flex;
-  align-items: center;
-}
-
-.search-bar input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.search-bar button {
-  padding: 10px 20px;
-  background-color: #212e2c;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.search-bar button:hover {
-  background-color: #1c2d23;
-}
-
-.selectors {
-  display: flex;
-  gap: 10px;
-}
-
-.selector {
+.property-card {
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* important */
+  height: 100%;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
-.selector span {
-  font-size: 14px;
-  margin-bottom: 5px;
-}
-
-.selector select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.property-card:hover {
+  transform: scale(1.05); 
 }
 
 .properties-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
 }
 
-.property-card {
-  background-color: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.property-img {
-  width: 100%;
-  height: auto;
-}
 
 .property-info {
-  padding: 16px;
-}
-
-.property-title {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.property-address {
-  color: #666;
-  font-size: 0.875rem;
-}
-
-.property-details {
+  flex-grow: 1;
   display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-.property-price {
-  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 1rem;
 }
 
-.property-price p {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.rent-button {
-  background: none;
-  border: none;
-  color: #6b7280;
-  cursor: pointer;
-}
-
-.rent-button:hover {
-  color: #374151;
-}
-
-.footer-container {
+.button-container {
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  background-color: #f8f9fa;
-  margin-top: 20px;
+  justify-content: flex-end; /* Right */
+  margin-top: auto; /* Push to bottom */
 }
 
-.footer-section {
-  flex: 1;
-  margin-right: 20px;
-}
-
-.footer-section h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin-bottom: 8px;
-}
-
-.footer-section ul li a {
-  color: #666;
-  text-decoration: none;
-}
-
-.footer-section ul li a:hover {
-  color: #000;
-}
-
-.newsletter {
-  display: flex;
-  margin-top: 10px;
-}
-
-.newsletter input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-right: 10px;
-}
-
-.newsletter button {
-  padding: 10px 20px;
-  background-color: #007bff;
+.search-btn {
+  background-color: #4f46e5;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.newsletter button:hover {
-  background-color: #0056b3;
-}
-
-.social-icons {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.social-icons svg {
-  font-size: 20px;
-  color: #666;
-}
-
-.social-icons svg:hover {
-  color: #000;
-}
-
-.footer-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 10px 20px;
-  background-color: #e9ecef;
-  margin-top: 20px;
-}
-
-.footer-bottom p {
-  margin: 0;
-}
-
-.footer-bottom .btn {
-  background: none;
   border: none;
-  color: #007bff;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
-.footer-bottom .btn:hover {
-  text-decoration: underline;
+.search-btn:hover {
+  background-color: #4338ca;
 }

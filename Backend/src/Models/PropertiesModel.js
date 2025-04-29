@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const propertySchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
-    address: { type: String, required: true },
+    streetAddress: { type: String, required: true },
     zip: { type: String, required: false },
     propertyID: { type: String, unique: true, required: true },
     type: { type: String, enum: ["rent", "sale"], required: true },
@@ -14,14 +14,17 @@ const propertySchema = new mongoose.Schema(
     size: { type: Number, required: false },
     status: {
       type: String,
-      enum: ["en attente", "en ligne", "en gestion"],
-      default: "en attente",
+      enum: ["On hold", "Online", "In management"],
+      default: "On hold",
     },
-    gestion: {
+    management: {
       type: String,
-      enum: ["unmanaged", "managed"],
-      default: "unmanaged",
+      enum: ["Unmanaged", "Managed"],
+      default: "Unmanaged",
     },
+    photos: { type: [String], required: true },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );

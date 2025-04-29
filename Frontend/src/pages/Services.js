@@ -1,132 +1,252 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Services.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Services() {
+// Import des images avec des noms différents
+import ServicesImg1 from "./images/Services1.jpg";
+import ServicesImg4 from "./images/Services4.jpg";
+import ServicesImg3 from "./images/Services3.jpg";
+
+
+
+
+const Services = () => {
+   const [currentIndex, setCurrentIndex] = React.useState(0);
+    const [formData, setFormData] = React.useState({
+      streetAddress: "",
+      city: "",
+    });
+    const images = [
+      "img/bg-img/hero1.jpg",
+      "img/bg-img/hero2.jpg",
+      "img/bg-img/hero3.jpg",
+    ];
+  
+    const sectionRef = React.useRef(null);
+    const streetRef = React.useRef(null);
+    const unitRef = React.useRef(null);
+    const cityRef = React.useRef(null);
+    const zipRef = React.useRef(null);
+  
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+  
+    const handleContinue = () => {
+      console.log("Form submitted", formData);
+    };
+  
+    const goToPrevSlide = () => {
+      setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    };
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("animate");
+            }
+          });
+        },
+        { threshold: 0.1 } // Déclenche quand 10% de l'élément est visible
+      );
+  
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+      }
+  
+      return () => {
+        if (sectionRef.current) {
+          observer.unobserve(sectionRef.current);
+        }
+      };
+    }, []);
+    const goToNextSlide = () => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+    };
+    useEffect(() => {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      }, 4000); // Change every 4 seconds
+  
+      return () => clearInterval(interval); // Clean up the interval on component unmount
+    }, []);
+   
   return (
-    <div className="services-page">
-      {/* Header */}
-      <header className="bg-light text-dark py-4 shadow sticky-top">
-        <div className="container d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
-            <h1 className="m-0 fs-3">Our services</h1>
-          </div>
-          <nav className="d-none d-md-flex">
+    <div>
+      <section className="hero">
+        <div className="hero-slides owl-carousel">
+          <div
+            className="single-hero-slide"
+            style={{
+              backgroundImage: `url(${images[currentIndex]})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              height: "100vh",
+              width: "100%",
+              transition: "background-image 0.5s ease-in-out",
+              position: "relative",
+            }}
+          >
+            {/* Overlay sombre */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: "rgba(48, 38, 2, 0.21)",
+                zIndex: 0,
+              }}
+            ></div>
+            <div
+              className="hero-content"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 1,
+                width: "100%",
+                textAlign: "center",
+                color: "white",
+                textShadow: "1px 1px 3px rgba(0, 0, 0, 0.8)",
+                padding: "0 20px",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "30px",
+                }}
+              >
+                {/* Flèche gauche */}
+                <span
+                  onClick={goToPrevSlide}
+                  style={{
+                    fontSize: "40px",
+                    cursor: "pointer",
+                    opacity: 0.8,
+                    transition: "all 0.3s",
+                    userSelect: "none",
+                    color: "#947054",
+                  }}
+                >
+                  ‹
+                </span>
 
-          </nav>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  {/* Titre principal */}
+                  <h2
+                    style={{
+                      fontSize: "clamp(32px, 6vw, 62px)",
+                      fontWeight: "200",
+                      letterSpacing: "3px",
+                      lineHeight: "1.2",
+                      margin: "0 0 10px 0",
+                      animation: "fadeIn 1.5s ease-out both",
+                    }}
+                  >
+                    Our Services
+                  </h2>
+                </div>
+
+                {/* Flèche droite */}
+                <span
+                  onClick={goToNextSlide}
+                  style={{
+                    fontSize: "40px",
+                    cursor: "pointer",
+                    opacity: 0.8,
+                    transition: "all 0.3s",
+                    userSelect: "none",
+                    color: "#947054",
+                  }}
+                >
+                  ›
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
-      </header>
+      </section>
+    <div className="services-wrapper">
 
-      <div className="container py-5">
-        <h1 className="text-center mb-4 services-title">Our Services</h1>
-        <h3 className="text-center bg-light text-muted service-details mb-5">
-          At Real Estate Agency, we provide professional and reliable real estate
-          services to help you buy, sell, rent, or manage properties with ease.
-        </h3>
+      <div className="services-box white-box">
+        At Real Estate Agency, we provide professional and reliable real estate services to help you buy, sell, rent, or manage properties with ease.
+      </div>
 
-        <div className="service-images d-flex flex-column flex-md-row justify-content-center align-items-center mb-5">
-          <div className="service-image service-image-1 me-md-4 mb-4 mb-md-0"></div>
-          <div className="service-image-container text-center">
-            <div className="service-image service-image-2 mb-3"></div>
-            <h2 className="service-caption">
-              We’ll make it easy for you — Tap 'Login'
-            </h2>
-          </div>
-        </div>
-
-        <h3 className="service-details mb-5 bg-light ">
-          It's well known that readers can be distracted by a page’s layout rather
-          than its content. Lorem Ipsum is commonly used because it mimics natural
-          text distribution, making it look like readable English. Today, many
-          desktop publishing tools and web editors use Lorem Ipsum as a default
-          placeholder, and a quick search will reveal its widespread presence
-          across websites.
-        </h3>
-
-        <h1 className="text-center testimonials-title mb-4">Why Choose Us</h1>
-        <div className="testimonial-image mb-5"></div>
-
-        {/* Services List */}
-        <div className="service-list row">
-          <div className="box col-md-6 mb-4 ">
-            <h3 className="service-heading bg-dark col-md-9 text-light">Property Sales & Rentals</h3>
-            <p className="service-text">
-              We offer a wide range of properties for sale and rent, ensuring you
-              find the perfect home or investment opportunity.
-            </p>
-          </div>
-          <div className="box col-md-6 mb-4">
-          <h3 className="service-heading bg-dark col-md-9 text-light">Property Management</h3>
-            <p className="service-text">
-              From tenant management to maintenance, we handle everything to keep
-              your property in top condition.
-            </p>
-          </div>
-          <div className=" box col-md-6 mb-4">
-          <h3 className="service-heading bg-dark col-md-9 text-light">Market Analysis & Valuation</h3>
-            <p className="service-text">
-              We assess property values and market trends to ensure you get the best
-              deal.
-            </p>
-          </div>
-          <div className=" box col-md-6 mb-4">
-          <h3 className="service-heading bg-dark col-md-9 text-light">Real Estate Consulting</h3>
-            <p className="service-text">
-              Our experts provide valuable insights to help you make informed real
-              estate decisions.
-            </p>
-          </div>
-        </div>
-
-    <div className="bg-brown text-white p-5 my-5 rounded shadow">
-      <h3 className="newsletter-title">Stay Updated With Our Latest News</h3>
-      <p className="newsletter-subtitle">
-        Subscribe to get the latest updates on real estate trends, tips, and new property listings.
-      </p>
-      <div className="row justify-content-center">
-        <div className="col-md-6 mb-4">
-          <div className="d-flex">
-            <input
-              type="email"
-              className="form-control newsletter-input"
-              placeholder="Enter your email"
-            />
-            <button className="btn btn-light newsletter-btn ms-2">Subscribe</button>
-          </div>
+      <div className="services-images">
+        <img
+          src={ServicesImg1}
+          alt="Service 1"
+          className="image-large"
+        />
+        <div className="image-side-container">
+          <img
+            src={ServicesImg3}
+            alt="Service 3"
+            className="image-small"
+          />
+          <p className="side-caption">We'll make it easy for you — Tap 'Login'</p>
         </div>
       </div>
 
-      {/* News Section */}
-      <div className="mt-5">
-        <h4 className="news-title">Recent News</h4>
-        <ul className="list-unstyled">
-          <li>
-            <a href="/news/1" className="text-white">
-              <strong>New Luxury Apartments Launched in Downtown</strong>
-            </a>
-            <p className="text-muted">Get an exclusive look at our newest luxury apartments in the heart of the city.</p>
-          </li>
-          <li>
-            <a href="/news/2" className="text-white">
-              <strong>How the Real Estate Market is Evolving in 2025</strong>
-            </a>
-            <p className="text-muted">Stay ahead of the market trends with our latest insights and expert opinions.</p>
-          </li>
-          <li>
-            <a href="/news/3" className="text-white">
-              <strong>10 Tips for First-Time Homebuyers</strong>
-            </a>
-            <p className="text-muted">Are you a first-time homebuyer? Check out our top 10 tips for a smooth buying experience.</p>
-          </li>
-        </ul>
+      <div className="services-box white-box">
+        It's well known that readers can be distracted by a page's layout rather than its content. Lorem Ipsum is commonly used because it mimics natural text distribution, making it look like readable English. Today, many desktop publishing tools and web editors use Lorem Ipsum as a default placeholder, and a quick search will reveal its widespread presence across websites.
       </div>
-    </div>
 
-        {/* Extra Sections */}
+      <h3 className="services-subtitle">Why Choose Us</h3>
+      <div className="intro-section">
+      <div className="intro-banner">
+        
+        <img
+          src={ServicesImg4}
+          alt="Services4" 
+          className="intro-image img-fluid zoom-hover rounded"
+        />
+      </div>
+
+      <div className="service-grid">
+        <div className="service-box">
+          <h4>Property Sales & Rentals</h4>
+          <p>
+            We offer a wide range of properties for sale and rent, ensuring you
+            find the perfect home or investment opportunity.
+          </p>
+        </div>
+        <div className="service-box">
+          <h4>Property Management</h4>
+          <p>
+            From tenant management to maintenance, we handle everything to keep
+            your property in top condition.
+          </p>
+        </div>
+        <div className="service-box">
+          <h4>Market Analysis & Valuation</h4>
+          <p>
+            We assess property values and market trends to ensure you get the
+            best deal.
+          </p>
+        </div>
+        <div className="service-box">
+          <h4>Real Estate Consulting</h4>
+          <p>
+            Our experts provide valuable insights to help you make informed
+            real estate decisions.
+          </p>
+        </div>
       </div>
     </div>
     
+    </div>
+    </div>
   );
-}
+};
 
 export default Services;

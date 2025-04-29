@@ -1,85 +1,232 @@
-import { useState } from "react";
-import "./Login.css";
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import SigninImage from "./images/Signin.png";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState, useEffect} from "react";
+import './Login.css';
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaYoutube,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaGoogle,
+  FaEnvelope,
+} from "react-icons/fa"
+
+import log from './images/log.png';
+
+
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = formData;
-
-    await fetch("http://localhost:3000/api/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    navigate("/home");
-  };
-
+  const togglePassword = () => setShowPassword(!showPassword);
+  const images = [
+    "img/bg-img/hero1.jpg",
+    "img/bg-img/hero2.jpg",
+    "img/bg-img/hero3.jpg",
+  ];
+  
+    const handlePrev = () => {
+      setStartIndex((prev) =>
+        prev === 0
+          ? testimonial.length - testimonialsPerPage
+          : prev - testimonialsPerPage
+      );
+    };
+  
+    const handleNext = () => {
+      setStartIndex((prev) =>
+        prev + testimonialsPerPage >= testimonial.length
+          ? 0
+          : prev + testimonialsPerPage
+      );
+    };
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const goToPrevSlide = () => {
+        setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+      };
+    
+      const goToNextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      };
+      useEffect(() => {
+        const interval = setInterval(() => {
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+        }, 4000); // Change every 4 seconds
+    
+        return () => clearInterval(interval); // Clean up the interval on component unmount
+      }, []);
   return (
-    <div className="signin-container container py-5" style={{ backgroundColor: "transparent" }}>
-      <div className="row align-items-center signin-content">
-        {/* Form Section */}
-        <div className="col-md-6 mb-4 mb-md-0 signin-form">
-          <h2 className="mb-4">Welcome Back</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group mb-3">
-              <label>Email Address:</label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                placeholder="Enter your email"
-              />
-            </div>
+<div>
+  <section className="hero">
+  <div className="hero-slides owl-carousel">
+    <div
+      className="single-hero-slide"
+      style={{
+        backgroundImage: `url(${images[currentIndex]})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        height: "100vh",
+        width: "100%",
+        transition: "background-image 0.5s ease-in-out",
+        position: "relative",
+      }}
+    >
+      {/* Overlay sombre */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(48, 38, 2, 0.21)",
+          zIndex: 0,
+        }}
+      ></div>
+      <div
+        className="hero-content"
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 1,
+          width: "100%",
+          textAlign: "center",
+          color: "white",
+          textShadow: "1px 1px 3px rgba(0, 0, 0, 0.8)",
+          padding: "0 20px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "30px",
+          }}
+        >
+          {/* Flèche gauche */}
+          <span
+            onClick={goToPrevSlide}
+            style={{
+              fontSize: "40px",
+              cursor: "pointer",
+              opacity: 0.8,
+              transition: "all 0.3s",
+              userSelect: "none",
+              color: "#947054",
+            }}
+          >
+            ‹
+          </span>
 
-            <div className="form-group mb-4">
-              <label>Password:</label>
-              <input
-                type="password"
-                name="password"
-                className="form-control"
-                value={formData.password}
-                onChange={handleChange}
-                required
-                placeholder="Enter your password"
-              />
-            </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {/* Titre principal */}
+            <h2
+              style={{
+                fontSize: "clamp(32px, 6vw, 62px)",
+                fontWeight: "200",
+                letterSpacing: "3px",
+                lineHeight: "1.2",
+                margin: "0 0 10px 0",
+                animation: "fadeIn 1.5s ease-out both",
+              }}
+            >
+             Log in to Discover Your Dream Home
+            </h2>
 
-            <button type="submit" className="btn btn-primary w-100">
-              Sign In
-            </button>
-          </form>
-        </div>
+           
+          </div>
 
-        {/* Image Section */}
-        <div className="col-md-6 text-center signin-image-container">
-          <img
-            src={SigninImage}
-            alt="Sign In"
-            className="img-fluid signin-image"
-            style={{ maxWidth: "70%", height: "auto", backgroundColor: "transparent" }}
-          />
+          {/* Flèche droite */}
+          <span
+            onClick={goToNextSlide}
+            style={{
+              fontSize: "40px",
+              cursor: "pointer",
+              opacity: 0.8,
+              transition: "all 0.3s",
+              userSelect: "none",
+              color: "#947054",
+            }}
+          >
+            ›
+          </span>
         </div>
       </div>
+
+      {/* Animation minimaliste */}
+      <style jsx global>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+      `}</style>
+    </div>
+  </div>
+</section>
+<div className="login-container">
+
+
+      <div className="login-box">
+  
+        {/* Left: Form */}
+        <div className="login-form">
+          <h2>Welcome Back!!</h2>
+
+          <form>
+            <label>Email</label>
+            <input type="email" placeholder="email@gmail.com" required />
+
+            <label>Password</label>
+            <div className="password-input">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter your password"
+                required
+              />
+              <span onClick={togglePassword}>
+                {showPassword ? '🙈' : '👁️'}
+              </span>
+            </div>
+
+            <div className="forgot-password">
+              <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit">Login</button>
+          </form>
+
+          <div className="separator">or</div>
+
+                    <div className="auth-buttons">
+                      <button type="button" className="btn google-btn">
+                        <FaGoogle className="google-icon" />
+                        Sign in with Google
+                      </button>
+                      <button type="button" className="btn phone-btn">
+                        <FaPhone className="phone-icon" />
+                        Sign in with Phone
+                      </button>
+                    </div>
+          
+          <p>
+            Don’t have an account? <a href="#">Sign up</a>
+          </p>
+        </div>
+
+        {/* Right: Image */}
+        <div className="login-image">
+        <img src={log} alt="Person using laptop" />
+        </div>
+      </div>
+    </div>
     </div>
   );
 };

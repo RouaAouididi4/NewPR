@@ -1,354 +1,223 @@
-import React, { useState } from 'react'; // Ajout de useState ici
-import './HouseForSaleOrRent.css';
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaYoutube, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import PropertyByLocation6 from "./images/PropertyByLocation6.jpg";
-import PropertyByLocation7 from "./images/PropertyByLocation7.jpg";
-import PropertyByLocation8 from "./images/PropertyByLocation8.jpg";
-import PropertyByLocation1 from "./images/PropertyByLocation1.jpg";
-import PropertyByLocation2 from "./images/PropertyByLocation2.jpg";
-import PropertyByLocation3 from "./images/PropertyByLocation3.jpg";
-import PropertyByLocation9 from "./images/PropertyByLocation9.jpg";
-import PropertyByLocation4 from "./images/PropertyByLocation4.jpg";
-import PropertyByLocation5 from "./images/PropertyByLocation5.jpg";
-import PropertyByLocation10 from "./images/PropertyByLocation10.jpg";
+import React, { useState, useEffect } from "react";
+import "./PropertyByLocation.css";
+import image1 from "./images/Listing1.jpg";
+import image2 from "./images/Listing2.jpg";
+import image3 from "./images/Listing3.jpg";
+import image4 from "./images/Listing4.jpg";
+import image5 from "./images/Listing5.jpg";
+import image6 from "./images/Listing6.jpg";
+import { Link, useNavigate } from "react-router-dom";
 
-
-
-function HouseForSaleOrRent() {
-  const [activeTab, setActiveTab] = useState("All");
+function PropertyHouse() {
   const navigate = useNavigate();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleRentClick = () => {
-    navigate('/details');
+  const images = [
+    "img/bg-img/hero1.jpg",
+    "img/bg-img/hero2.jpg",
+    "img/bg-img/hero3.jpg",
+  ];
+
+  const featuredProperties = [
+    {
+      id: 1,
+      image: image1,
+      price: "1.500.000DT",
+      title: "Individual Villa",
+      address: "Hergla, Cité Nozha",
+      description:
+        "Cette villa d'exception, située à seulement 150 m de la plage dans le quartier prisé de Cité Nozha à Hergla.",
+    },
+    {
+      id: 2,
+      image: image2,
+      price: "2.500.000DT",
+      title: "Appartement Luxueux",
+      address: "Kantaoui, Sousse",
+      description:
+        "Un appartement haut standing avec vue sur la marina, situé au cœur du prestigieux quartier touristique de Kantaoui.",
+    },
+    {
+      id: 3,
+      image: image3,
+      price: "800.000DT",
+      title: "Studio Moderne",
+      address: "Rue Orange, Monastir",
+      description:
+        "Ce studio moderne offre un espace compact mais élégant à quelques pas de la mer, idéal pour célibataires ou étudiants.",
+    },
+    {
+      id: 4,
+      image: image4,
+      price: "1.200.000DT",
+      title: "Appartement YOSRA",
+      address: "Nabeul",
+      description:
+        "Un appartement lumineux avec balcon spacieux, parfait pour une petite famille ou un couple.",
+    },
+    {
+      id: 5,
+      image: image5,
+      price: "800.000DT",
+      title: "Studio Moderne",
+      address: "Rue Orange, Monastir",
+      description:
+        "Ce studio moderne offre un espace compact mais élégant à quelques pas de la mer, idéal pour célibataires ou étudiants.",
+    },
+    {
+      id: 6,
+      image: image6,
+      price: "800.000DT",
+      title: "Studio Moderne",
+      address: "Rue Orange, Monastir",
+      description:
+        "Ce studio moderne offre un espace compact mais élégant à quelques pas de la mer, idéal pour célibataires ou étudiants.",
+    },
+  ];
+
+  const goToPrevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
 
+  const goToNextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <>
-      {/* Search Container */}
-      <div className="search-container">
-        <div className="search-bar">
-          <input type="text" placeholder="Search for property" />
-          <button>Search</button>
-        </div>
-        <div className="selectors">
-          <div className="selector">
-            <span>Location</span>
-            <select>
-              <option value="">All</option>
-              <option value="location1">Ariana</option>
-              <option value="location2">Béja</option>
-              <option value="location3">Ben Arous</option>
-              <option value="location4">Bizerte</option>
-              <option value="location5">Gabès</option>
-              <option value="location6">Gafsa</option>
-              <option value="location7">Jendouba</option>
-              <option value="location8">Kairouan</option>
-              <option value="location9">Kasserine</option>
-              <option value="location10">Kebili</option>
-              <option value="location11">Kef</option>
-              <option value="location12">Mahdia</option>
-              <option value="location13">Manouba</option>
-              <option value="location14">Médenine</option>
-              <option value="location15">Monastir</option>
-              <option value="location16">Nabeul</option>
-              <option value="location17">Sfax</option>
-              <option value="location18">Sidi Bouzid</option>
-              <option value="location19">Siliana</option>
-              <option value="location20">Sousse</option>
-              <option value="location21">Tataouine</option>
-              <option value="location22">Tozeur</option>
-              <option value="location23">Tunis</option>
-              <option value="location24">Zaghouan</option>
-            </select>
-          </div>
-          <div className="selector">
-            <span>Property</span>
-            <select>
-              <option value="">All</option>
-              <option value="property1">For Rent</option>
-              <option value="property2">For Sale</option>
-            </select>
-          </div>
-          <div className="selector">
-            <span>Type</span>
-            <select>
-              <option value="">Type</option>
-              <option value="type1">Commercial</option>
-              <option value="type2">Office</option>
-              <option value="type3">Shop</option>
-              <option value="type4">Residential</option>
-              <option value="type5">Apartment</option>
-            </select>
-          </div>
-        </div>
-      </div>
+    <div className="property-listing-container">
+      {/* Hero Section */}
+      <section className="hero-section">
+        <div
+          className="single-hero-slide"
+          style={{
+            backgroundImage: `url(${images[currentIndex]})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            height: "100vh",
+            marginLeft: "10px",
+            width: "100%",
+            transition: "background-image 0.5s ease-in-out",
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: "rgba(48, 38, 2, 0.21)",
+              zIndex: 0,
+            }}
+          ></div>
 
-      {/* Features and Properties Section */}
-      <div>
-        {/* Section Our Features Properties */}
-        <div className="features-container">
-          <h2 className="features-title">Our Features Properties</h2>
-          <button className="browse-button">Browse All Properties &gt;&gt;</button>
+          <div
+            className="hero-content"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 1,
+              width: "100%",
+              textAlign: "center",
+              color: "white",
+              padding: "0 20px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "30px" }}>
+              <span
+                onClick={goToPrevSlide}
+                style={{
+                  fontSize: "40px",
+                  cursor: "pointer",
+                  opacity: 0.8,
+                  userSelect: "none",
+                  color: "#947054",
+                }}
+              >
+                ‹
+              </span>
+
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <h2 style={{
+                  fontSize: "clamp(32px, 6vw, 62px)",
+                  fontWeight: "200",
+                  letterSpacing: "3px",
+                  lineHeight: "1.2",
+                }}>
+                  House For Sale Or Rent
+                </h2>
+                <h2 className="search-home-title">Properties made for you.</h2>
+              </div>
+
+              <span
+                onClick={goToNextSlide}
+                style={{
+                  fontSize: "40px",
+                  cursor: "pointer",
+                  opacity: 0.8,
+                  userSelect: "none",
+                  color: "#947054",
+                }}
+              >
+                ›
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Properties */}
+      <section className="featured-properties">
+        <div className="section-header">
+          <h2 className="animated-title">FEATURED PROPERTIES</h2>
+          <p className="animated-paragraph">
+            Découvrez nos propriétés sélectionnées avec soin, prêtes à devenir votre nouveau chez-vous.
+          </p>
         </div>
 
-        {/* Section Featured Properties */}
         <div className="properties-grid">
-        <div className="property-card">
-          <img src={PropertyByLocation6} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Villa With Panoramic View</h2>
-            <p className="property-address">21 Blue Lagoon Road, Mahdia 5121</p>
-            <div className="property-details">
-              <span>📏 125 m²</span>
-              <span>🛏 3 Beds</span>
-              <span>🛁 2 Baths</span>
+          {featuredProperties.map((property) => (
+            <div key={property.id} className="property-card" style={{ height: "500px" }}>
+              <div className="image-wrapper">
+                <div
+                  className="property-image"
+                  style={{
+                    backgroundImage: `url(${property.image})`,
+                  }}
+                >
+                  <span className="property-badge">FOR SALE</span>
+                </div>
+                <div className="property-price">{property.price}</div>
+              </div>
+
+              <div className="property-info">
+                <h3 className="property-title">{property.title}</h3>
+                <p className="property-address">{property.address}</p>
+                <hr className="property-divider" />
+                <p className="property-description">{property.description}</p>
+                <div className="button-container">
+                  <button onClick={() => navigate(`/details/${property.id}`)} className="search-button">
+                    Voir Détails
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="property-price">
-              <p>💰 ≈ 850/ DT <span>/month</span></p>
-              <button className="rent-button">❤️</button>
-            </div>
-          </div>
+          ))}
         </div>
-        
-      
-
-        <div className="property-card">
-          <img src={PropertyByLocation7} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Sunset Haven Estate</h2>
-            <p className="property-address">78 Coastal Road, Hammamet 8042</p>
-            <div className="property-details">
-              <span>📏 116,13 m²</span>
-              <span>🛏 4 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈ 7,50,000DT </p>
-              <button className="rent-button">❤️</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="property-card">
-          <img src={PropertyByLocation8} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Willow Brook Residence</h2>
-            <p className="property-address">56 Rue de l’Amphithéâtre, El Djem 5160</p>
-            <div className="property-details">
-              <span>📏  185,81 m²</span>
-              <span>🛏 4 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈ 3 002,63/DT <span>/month</span></p>
-              <button className="rent-button">❤️</button>
-            </div>
-          </div>
-        </div>
-         
-
-        
-
-
-        <div className="property-card">
-          <img src={PropertyByLocation1} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Cozy Cottage In Napa Valley</h2>
-            <p className="property-address">14 Avenue Ulysse, Djerba Midoun 4116</p>
-            <div className="property-details">
-              <span>📏  125,42 m²</span>
-              <span>🛏 3 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈ 3 348/DT <span>/month</span></p>
-              <button className="rent-button">Rent</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="property-card">
-          <img src={PropertyByLocation2} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Luxurious Family Home</h2>
-            <p className="property-address">95 Rue de Kairouan, Tozeur 2200</p>
-            <div className="property-details">
-              <span>📏 125,42 m²</span>
-              <span>🛏 3 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈ 9,57,000 DT </p>
-              <button className="rent-button">Buy</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="property-card">
-          <img src={PropertyByLocation3} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Modern Apartment In LA</h2>
-            <p className="property-address">120 Avenue Ibn Khaldoun, Kairouan 3100</p>
-            <div className="property-details">
-              <span>📏 125,42 m²</span>
-              <span>🛏 3 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈  2 933,405/DT <span>/month</span></p>
-              <div className="listing-tabs">
-                <button className={activeTab === "For Rent" ? "active" : ""} onClick={() => setActiveTab("For Rent")}>For Rent</button>
-                <button className={activeTab === "For Sale" ? "active" : ""} onClick={() => setActiveTab("For Sale")}>For Sale</button>
-             </div>            
-          </div>
-          </div>
-        </div>
-
-
-        <div className="property-card">
-          <img src={PropertyByLocation9} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Stunning Modern Family Home</h2>
-            <p className="property-address">30 Boulevard de l’Environnement, Nabeul 8000</p>
-            <div className="property-details">
-              <span>📏 125,42 m²</span>
-              <span>🛏 3 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈ 419 907/DT  <span>/month</span></p>
-              <button className="rent-button">Rent</button>
-            </div>
-          </div>
-        </div>
-          
-
-        <div className="property-card">
-          <img src={PropertyByLocation4} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Luxury Estate with Panoramic</h2>
-            <p className="property-address">67 Rue de la Plage, Mahdia 5100</p>
-            <div className="property-details">
-              <span>📏 125,42 m²</span>
-              <span>🛏 3 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈ 419 907 DT  </p>
-              <button className="rent-button">Buy</button>
-            </div>
-          </div>
-        </div>
-         
-        <div className="property-card">
-          <img src={PropertyByLocation5} alt="PropertyByLocation" className="property-img"/>
-          <div className="property-info">
-            <h2 className="property-title">Spacious Ranch-Style Home</h2>
-            <p className="property-address">23 Avenue Farhat Hached, Monastir 5000</p>
-            <div className="property-details">
-              <span>📏 125,42 m²</span>
-              <span>🛏 3 Beds</span>
-              <span>🛁 2 Baths</span>
-            </div>
-            <div className="property-price">
-              <p>💰 ≈ 419 907/DT  <span>/month</span></p>
-              <button className="rent-button">Rent</button>
-            </div>
-          </div>
-        </div>
-      
-
-
-
-        
-      </div>
-      </div>
-      <div className="relative w-full h-[400px] md:h-[500px] bg-cover bg-center flex items-center justify-center text-white px-6" style={{ backgroundImage: `url(${PropertyByLocation10})` }}>
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-      <div className="relative text-center max-w-2xl">
-        <h1 className="text-3xl md:text-5xl font-bold">
-          We’re Here To Find Your <br /> New Home Project.
-        </h1>
-
-        <div className="mt-6 flex justify-start gap-4"> {/* Changed justify-center to justify-start */}
-         <button onClick={() => navigate('/quote')} className="bg-white text-black px-5 py-3 rounded-lg font-medium text-lg shadow-md hover:bg-gray-200">
-           Get a Quote →
-         </button>
-         <button onClick={() => navigate('/properties')} className="border border-white px-5 py-3 rounded-lg font-medium text-lg hover:bg-white hover:text-black transition">
-           Our Property →
-         </button>
-       </div>
-      </div>
-     </div>
-
-      <div className="footer-container">
-        <div className="footer-section">
-          <h2 className="logo">HOMZ</h2>
-          <p className="description">At Homz, we are committed to providing exceptional service and support.</p>
-          <div className="newsletter">
-            <input type="email" placeholder="Enter Your Email" />
-            <button>Discover More</button>
-          </div>
-          <div className="social-icons">
-            <FaFacebookF />
-            <FaInstagram />
-            <FaLinkedinIn />
-            <FaYoutube />
-          </div>
-        </div>
-
-        <div className="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="/about-us">About Us</a></li>
-            <li><a href="/properties">Properties</a></li>
-            <li><a href="/listings">Listings</a></li>
-            <li><a href="/blog-news">Blog News</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </div>
-
-        <div className="footer-section">
-          <h3>Legal</h3>
-          <ul>
-            <li><a href="/apartment">Apartment</a></li>
-            <li><a href="/my-house">My House</a></li>
-            <li><a href="/interiors">Interiors</a></li>
-            <li><a href="/square-area">Square Area</a></li>
-            <li><a href="/terms-and-conditions">Terms & Condition</a></li>
-          </ul>
-        </div>
-
-        <div className="footer-section">
-          <h3>Contact</h3>
-          <ul className="contact-info">
-            <li>
-              <FaMapMarkerAlt /> 
-              <a href="https://maps.google.com/?q=Akouda,Sousse,Tunisia" target="_blank" rel="noopener noreferrer">
-                Akouda, Sousse, Tunisia
-              </a>
-            </li>
-            <li>
-              <FaPhone /> 
-              <a href="tel:+21612345678">Téléphone: +216 12 345 678</a>
-            </li>
-            <li>
-              <FaEnvelope />  
-              <a href="mailto:contact@agenceimmobilier.com">Email: contact@agenceimmobilier.com</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="footer-bottom">
-        <p>© Copyright 2025 Homz. All rights reserved</p>
-        <button className="btn">Terms & Condition</button> | <button className="btn">Privacy</button>
-      </div>
-
-    </>
+      </section>
+    </div>
   );
 }
 
-export default HouseForSaleOrRent;
+export default PropertyHouse;

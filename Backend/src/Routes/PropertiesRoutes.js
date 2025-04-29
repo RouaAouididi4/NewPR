@@ -1,45 +1,53 @@
 const express = require("express");
-const Property = require("./../Models/PropertiesModel.js");
-const {
-  searchProperties,
-  getPropertyById,
-} = require("../Controllers/PropertiesController");
+const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
+const PropertiesController = require("../Controllers/PropertiesController.js");
 
 const router = express.Router();
 
-// Route pour la recherche (placée avant /:id)
-router.get("/search", searchProperties);
-
-// Ajouter une nouvelle propriété
-router.post("/", async (req, res) => {
-  const newProperty = new Property(req.body);
-  await newProperty.save();
-  res.status(201).json({ message: "Property added ✅", property: newProperty });
+// Configuration du stockage Multer
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    // Utilisation de chemins relatifs pour les uploads
+    const uploadDir = path.join(__dirname, '..', 'uploads', 'photos');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+    cb(null, uploadDir);
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, 'property-' + uniqueSuffix + path.extname(file.originalname));
+  }
 });
 
-// Obtenir toutes les propriétés
-router.get("/", async (req, res) => {
-  const properties = await Property.find();
-  res.json(properties);
+const upload = multer({ storage: storage });
+
+// Route pour télécharger des fichiers
+router.post('/upload', upload.array('photos', 10), (req, res) => {
+  try {
+    const fileUrls = req.files.map(file => `/uploads/photos/${file.filename}`);
+    res.json({ message: 'Fichiers téléchargés avec succès!', files: fileUrls });
+  } catch (error) {
+    console.error('Erreur lors du téléchargement:', error);
+    res.status(500).json({ message: 'Échec du téléchargement.' });
+  }
 });
 
-// Obtenir une propriété par ID (placée après /search)
-router.get("/:id", getPropertyById);
-
-// Mettre à jour une propriété
-router.put("/:id", async (req, res) => {
-  const updatedProperty = await Property.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
-  res.json({ message: "Property updated ✅", property: updatedProperty });
+// Route pour obtenir les photos téléchargées
+router.get("/photos", (req, res) => {
+  const uploadDir = path.join(__dirname, '..', 'uploads', 'photos');
+  const photos = fs.readdirSync(uploadDir).map(file => `/uploads/photos/${file}`);
+  res.json(photos);
 });
 
-// Supprimer une propriété
-router.delete("/:id", async (req, res) => {
-  await Property.findByIdAndDelete(req.params.id);
-  res.json({ message: "Property deleted ✅" });
-});
+// Routes des propriétés
+router.get("/search", PropertiesController.searchProperties);
+router.post("/add", upload.array('photos', 10), PropertiesController.createProperty);
+router.get("/", PropertiesController.getAllProperties);
+router.get("/:id", PropertiesController.getPropertyById);
+router.put("/:id", PropertiesController.updateProperty);
+router.delete("/:id", PropertiesController.deleteProperty);
 
 module.exports = router;

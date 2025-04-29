@@ -1,0 +1,73 @@
+/* /src/components/PropertyDetails.css */
+
+.property-details-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .property-images img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  
+  .property-info {
+    grid-column: span 2;
+  }
+  
+  .property-info h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .property-info .address {
+    font-size: 16px;
+    color: #777;
+  }
+  
+  .property-info .price {
+    font-size: 22px;
+    color: #2b6cb0;
+    margin-top: 10px;
+  }
+  
+  .property-info .description {
+    margin-top: 10px;
+  }
+  
+  .features-list {
+    margin-top: 15px;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .features-list li {
+    margin-bottom: 5px;
+    padding-left: 20px;
+    position: relative;
+  }
+  
+  .features-list li::before {
+    content: "✔️";
+    position: absolute;
+    left: 0;
+  }
+  
+  .agent-info {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .agent-photo {
+    width: 120px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  

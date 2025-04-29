@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   FaFacebookF,
   FaInstagram,
@@ -6,143 +7,170 @@ import {
   FaYoutube,
   FaMapMarkerAlt,
   FaPhone,
+  FaGoogle,
   FaEnvelope,
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import "./Footer.css"; // Assurez-vous de créer ce fichier CSS
-
 const Footer = () => {
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    // Logique d'inscription à la newsletter
-    alert("Merci pour votre inscription à notre newsletter!");
-  };
+    return (
+  
+    <div> 
+    {/* Footer */}
+      <footer className="footer-section bg-dark text-light pt-5 pb-4">
+        <div className="container  ">
+          <div className="row">
+            {/* Column 1 - Brand Info */}
+            <div className="col-lg-3 col-md-6 mb-4">
+              <div className="footer-brand">
+                <h2 className="text-white mb-3">CasaTech</h2>
+                <p className="footer-text">
+                  At CasaTech, we are committed to providing exceptional service
+                  and support.
+                </p>
+                <div className="newsletter-form d-flex mt-4">
+                  <input
+                    type="email"
+                    className="form-control me-2"
+                    placeholder="Enter Your Email"
+                  />
+                  <button className="btn btn-outline-light">
+                    Discover More
+                  </button>
+                </div>
+                <div className="social-icons mt-4">
+                  <a
+                    href="https://facebook.com"
+                    className="social-icon"
+                    aria-label="Facebook"
+                  >
+                    <FaFacebookF />
+                  </a>
+                  <a
+                    href="https://instagram.com"
+                    className="social-icon"
+                    aria-label="Instagram"
+                  >
+                    <FaInstagram />
+                  </a>
+                  <a
+                    href="https://linkedin.com"
+                    className="social-icon"
+                    aria-label="LinkedIn"
+                  >
+                    <FaLinkedinIn />
+                  </a>
+                  <a
+                    href="https://youtube.com"
+                    className="social-icon"
+                    aria-label="YouTube"
+                  >
+                    <FaYoutube />
+                  </a>
+                </div>
+              </div>
+            </div>
 
-  return (
-    <footer className="footer">
-      <div className="footer-container">
-        {/* Section 1: Logo et Newsletter */}
-        <div className="footer-section">
-          <h2 className="logo">HOMZ</h2>
-          <p className="description">
-            At Homz, we are committed to providing exceptional service and
-            support.
-          </p>
+            {/* Column 2 - Quick Links */}
+            <div className="col-lg-3 col-md-6 mb-4">
+              <h5 className="footer-heading mb-4">Quick Links</h5>
+              <ul className="footer-links list-unstyled">
+                <li className="mb-2">
+                  <a href="/about" className="footer-link">
+                    About Us
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="/properties" className="footer-link">
+                    Properties
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="/Property-Listing" className="footer-link">
+                    Listings
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="/blog" className="footer-link">
+                    Blog News
+                  </a>
+                </li>
+                <li>
+                  <a href="/contact" className="footer-link">
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-          <form className="newsletter" onSubmit={handleNewsletterSubmit}>
-            <input
-              type="email"
-              placeholder="Enter Your Email"
-              required
-              aria-label="Email for newsletter"
-            />
-            <button type="submit">Discover More</button>
-          </form>
+            {/* Column 3 - Legal */}
+            <div className="col-lg-3 col-md-6 mb-4">
+              <h5 className="footer-heading mb-4">Legal</h5>
+              <ul className="footer-links list-unstyled">
+                <li className="mb-2">
+                  <a href="/apartment" className="footer-link">
+                    Apartment
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="/my-house" className="footer-link">
+                    My House
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="/interiors" className="footer-link">
+                    Interiors
+                  </a>
+                </li>
+                <li className="mb-2">
+                  <a href="/square-area" className="footer-link">
+                    Square Area
+                  </a>
+                </li>
+                <li>
+                  <a href="/terms-and-conditions" className="footer-link">
+                    Terms & Conditions
+                  </a>
+                </li>
+              </ul>
+            </div>
 
-          <div className="social-icons">
-            <a href="https://facebook.com" aria-label="Facebook">
-              <FaFacebookF />
-            </a>
-            <a href="https://instagram.com" aria-label="Instagram">
-              <FaInstagram />
-            </a>
-            <a href="https://linkedin.com" aria-label="LinkedIn">
-              <FaLinkedinIn />
-            </a>
-            <a href="https://youtube.com" aria-label="YouTube">
-              <FaYoutube />
-            </a>
+            {/* Column 4 - Contact Info */}
+            <div className="col-lg-3 col-md-6 mb-4">
+              <h5 className="footer-heading mb-4">Contact</h5>
+              <ul className="footer-contact list-unstyled">
+                <li className="mb-3">
+                  <FaMapMarkerAlt className="footer-icon me-2" />
+                  <a
+                    href="https://maps.google.com/?q=Akouda,Sousse,Tunisia"
+                    className="footer-link"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Akouda, Sousse, Tunisia
+                  </a>
+                </li>
+                <li className="mb-3">
+                  <FaPhone className="footer-icon me-2" />
+                  <a href="tel:+21612345678" className="footer-link">
+                    +216 12 345 678
+                  </a>
+                </li>
+                <li>
+                  <FaEnvelope className="footer-icon me-2" />
+                  <a
+                    href="mailto:contact@agenceimmobilier.com"
+                    className="footer-link"
+                  >
+                    contact@agenceimmobilier.com
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-
-        {/* Section 2: Liens rapides */}
-        <div className="footer-section">
-          <h3>Quick Links</h3>
-          <ul>
-            <li>
-              <Link to="/about-us">About Us</Link>
-            </li>
-            <li>
-              <Link to="/properties">Properties</Link>
-            </li>
-            <li>
-              <Link to="/listings">Listings</Link>
-            </li>
-            <li>
-              <Link to="/blog-news">Blog News</Link>
-            </li>
-            <li>
-              <Link to="/contact">Contact</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Section 3: Liens légaux */}
-        <div className="footer-section">
-          <h3>Legal</h3>
-          <ul>
-            <li>
-              <Link to="/apartment">Apartment</Link>
-            </li>
-            <li>
-              <Link to="/my-house">My House</Link>
-            </li>
-            <li>
-              <Link to="/interiors">Interiors</Link>
-            </li>
-            <li>
-              <Link to="/square-area">Square Area</Link>
-            </li>
-            <li>
-              <Link to="/terms-and-conditions">Terms & Conditions</Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Section 4: Contact */}
-        <div className="footer-section">
-          <h3>Contact</h3>
-          <ul className="contact-info">
-            <li>
-              <FaMapMarkerAlt className="contact-icon" />
-              <a
-                href="https://maps.google.com/?q=Akouda,Sousse,Tunisia"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Our location on Google Maps"
-              >
-                Akouda, Sousse, Tunisia
-              </a>
-            </li>
-            <li>
-              <FaPhone className="contact-icon" />
-              <a href="tel:+21612345678" aria-label="Phone number">
-                Téléphone: +216 12 345 678
-              </a>
-            </li>
-            <li>
-              <FaEnvelope className="contact-icon" />
-              <a
-                href="mailto:contact@agenceimmobilier.com"
-                aria-label="Email us"
-              >
-                Email: contact@agenceimmobilier.com
-              </a>
-            </li>
-          </ul>
-        </div>
+      </footer>
       </div>
-
-      {/* Copyright */}
-      <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} Homz. All rights reserved</p>
-        <div>
-          <Link to="/terms-and-conditions">Terms & Conditions</Link> |{" "}
-          <Link to="/privacy">Privacy Policy</Link>
-        </div>
-      </div>
-    </footer>
   );
-};
+}
 
-export default Footer;
+export default Footer;
+ 

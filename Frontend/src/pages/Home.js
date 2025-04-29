@@ -1,6 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, use } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import image1 from "./images/Listing1.jpg";
+import image2 from "./images/Listing2.jpg";
+import image3 from "./images/Listing3.jpg";
+import image4 from "./images/Listing4.jpg";
+import image5 from "./images/Listing5.jpg";
+import imagevideo from "./images/imagevideo.png";
+import image6 from "./images/Listing6.jpg";
+import client1 from "./images/client1.jpg";
+import jeremyScottImage from "./images/scott.png";
+import client2 from "./images/client2.jpg";
+import client3 from "./images/client3.jpg";
+import client4 from "./images/client4.jpg";
+import client5 from "./images/client5.jpg";
+import client6 from "./images/client6.jpg";
 import {
   FaFacebookF,
   FaInstagram,
@@ -12,6 +26,80 @@ import {
 } from "react-icons/fa";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const testimonial = [
+    {
+      id: 1,
+      name: "Iline Haddad",
+      role: "CEO, Company Inc.",
+      content:
+        "This product completely transformed our workflow. The team is more productive and we've seen incredible results.",
+      photo: client1,
+    },
+    {
+      id: 2,
+      name: "Alma Mejri",
+      role: "Marketing Director",
+      content:
+        "I was skeptical at first, but after using it for just one week I can't imagine working without it anymore.",
+      photo: client2,
+    },
+    {
+      id: 3,
+      name: "Amine Jarray",
+      role: "Product Manager",
+      content:
+        "The customer support is exceptional. They went above and beyond to help us implement the solution.",
+      photo: client3,
+    },
+    {
+      id: 4,
+      name: "Walid Tobbi",
+      role: "UX Designer",
+      content:
+        "An intuitive and powerful tool that helped streamline our design process. I highly recommend it.",
+      photo: client4,
+    },
+    {
+      id: 5,
+      name: "Houssem Chmangui",
+      role: "CTO, Tech Corp",
+      content:
+        "Robust, reliable, and extremely helpful. One of the best investments we've made in tech.",
+      photo: client5,
+    },
+    {
+      id: 6,
+      name: "Lina Bobtan",
+      role: "Freelancer",
+      content:
+        "I love how simple it is to use. It has improved the way I work with my clients.",
+      photo: client6,
+    },
+  ];
+  const [startIndex, setStartIndex] = useState(0);
+  const testimonialsPerPage = 3;
+
+  const visibleTestimonials = testimonial.slice(
+    startIndex,
+    startIndex + testimonialsPerPage
+  );
+
+  const handlePrev = () => {
+    setStartIndex((prev) =>
+      prev === 0
+        ? testimonial.length - testimonialsPerPage
+        : prev - testimonialsPerPage
+    );
+  };
+
+  const handleNext = () => {
+    setStartIndex((prev) =>
+      prev + testimonialsPerPage >= testimonial.length
+        ? 0
+        : prev + testimonialsPerPage
+    );
+  };
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showAdditionalFilters, setShowAdditionalFilters] = useState(false);
   const [filters, setFilters] = useState({
@@ -26,6 +114,31 @@ const Home = () => {
     minPrice: "",
     maxPrice: "",
   });
+
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate");
+          }
+        });
+      },
+      { threshold: 0.1 } // Déclenche quand 10% de l'élément est visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +169,7 @@ const Home = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top px-4 collapse navbar-collapse justify-content-end">
         <a className="navbar-brand" href="/">
-          HOMZ
+          CasaTech
         </a>
         <button
           className="navbar-toggler"
@@ -94,6 +207,7 @@ const Home = () => {
           </li>
         </ul>
       </nav>
+
       <section className="hero">
         <div className="hero-slides owl-carousel">
           <div
@@ -168,7 +282,7 @@ const Home = () => {
                       fontWeight: "200",
                       letterSpacing: "3px",
                       lineHeight: "1.2",
-                      margin: "0 0 10px 0" /* Ajout de marge en bas */,
+                      margin: "0 0 10px 0",
                       animation: "fadeIn 1.5s ease-out both",
                     }}
                   >
@@ -211,47 +325,51 @@ const Home = () => {
           </div>
         </div>
       </section>
-      ///////////////////////////////////////////////////////////////////////////
       <div className="filter-section">
         <div className="filter-row">
           <div className="filter-group">
-            <label className="filter-label">Keyword</label>
+            <label className="filter-label">Title</label>
             <input
               type="text"
               className="filter-input"
-              placeholder="Enter keywords..."
+              placeholder="Enter a title..."
             />
           </div>
 
           <div className="filter-group">
+            <label className="filter-label">Street Address</label>
+            <input
+              type="text"
+              className="filter-input"
+              placeholder="Enter a StreetAdress..."
+            />
+          </div>
+          <div className="filter-group">
             <label className="filter-label">All Cities</label>
             <select className="filter-select">
               <option>Select city</option>
-              <option>New York</option>
-              <option>Los Angeles</option>
-            </select>
-          </div>
+              <option>Djerba</option>
 
-          <div className="filter-group">
-            <label className="filter-label">All Categories</label>
-            <select className="filter-select">
-              <option>All categories</option>
-              <option>Apartments</option>
-              <option>Houses</option>
+              <option>Grand Tunis</option>
+              <option>Monastir</option>
+
+              <option>Nabeul</option>
+              <option>Sousse</option>
             </select>
           </div>
         </div>
 
         <div className="filter-row">
           <div className="filter-group">
-            <label className="filter-label">All Offers</label>
+            <label className="filter-label" All>
+              Type
+            </label>
             <select className="filter-select">
-              <option>All offers</option>
+              <option>Select a type</option>
               <option>For rent</option>
               <option>For sale</option>
             </select>
           </div>
-
           <div className="filter-group">
             <label className="filter-label">Bedrooms</label>
             <select className="filter-select">
@@ -310,281 +428,348 @@ const Home = () => {
                 placeholder="Max"
                 style={{ flex: 1 }}
               />
-              <span style={{ lineHeight: "35px", marginLeft: "5px" }}>mil</span>
+              <span style={{ lineHeight: "35px", marginLeft: "5px" }}>DT</span>
             </div>
           </div>
         </div>
-        {showAdditionalFilters && (
-          <>
-            <div className="filter-row">
-              <div className="filter-group">
-                <label className="filter-label">All Types</label>
-                <select className="filter-select">
-                  <option>All types</option>
-                  <option>Apartment</option>
-                  <option>House</option>
-                  <option>Villa</option>
-                </select>
-              </div>
 
-              <div className="filter-group">
-                <label className="filter-label">All Categories</label>
-                <select className="filter-select">
-                  <option>All categories</option>
-                  <option>Residential</option>
-                  <option>Commercial</option>
-                </select>
-              </div>
-
-              <div className="filter-group">
-                <label className="filter-label">All Actions</label>
-                <select className="filter-select">
-                  <option>All actions</option>
-                  <option>For Rent</option>
-                  <option>For Sale</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="filter-row">
-              <div className="filter-group">
-                <label className="filter-label">All City</label>
-                <select className="filter-select">
-                  <option>All cities</option>
-                  <option>New York</option>
-                  <option>Los Angeles</option>
-                </select>
-              </div>
-
-              <div className="filter-group">
-                <label className="filter-label">All Actions</label>
-                <select className="filter-select">
-                  <option>All actions</option>
-                  <option>For Rent</option>
-                  <option>For Sale</option>
-                </select>
-              </div>
-
-              <div className="filter-group">
-                <label className="filter-label">All City</label>
-                <select className="filter-select">
-                  <option>All cities</option>
-                  <option>New York</option>
-                  <option>Chicago</option>
-                </select>
-              </div>
-            </div>
-          </>
-        )}
         {/* Bouton MORE FILTERS */}
         <div className="filters-footer">
-          <span
-            className="more-filters"
-            onClick={() => setShowAdditionalFilters(!showAdditionalFilters)}
-          >
-            {showAdditionalFilters ? "- LESS FILTERS" : "+ MORE FILTERS"}
-          </span>
           <button className="search-btn">SEARCH</button>
         </div>
       </div>
       {/* Featured Properties Section */}
       <section className="featured-properties">
         <div className="section-header">
-          <h2>FEATURED PROPERTIES</h2>
-          <p></p>
+          <h2 className="animated-title">FEATURED PROPERTIES</h2>
+          <p className="animated-paragraph">
+            Découvrez nos propriétés sélectionnées avec soin, prêtes à devenir
+            votre nouveau chez-vous.
+          </p>
         </div>
 
         <div className="properties-grid">
           {/* Property Card 1 */}
-          <div className="property-card">
-            <div
-              className="property-image"
-              style={{ backgroundImage: "url('img/properties/villa.jpg')" }}
-            ></div>
-            <div className="property-info">
-              <span className="property-type">FOR SALE</span>
-              <div className="property-price">1500.000DT</div>
-              <h3 className="property-title">studio s3</h3>
-              <p className="property-address">25 Rue carthage</p>
-              <hr className="property-divider" />
-              <p className="property-description"></p>
-            </div>
-          </div>
 
-          {/* Property Card 2 */}
           <div className="property-card">
-            <div
-              className="property-image"
-              style={{ backgroundImage: "url('img/properties/townhouse.jpg')" }}
-            ></div>
-            <div className="property-info">
-              <span className="property-type">FOR RENT</span>
-              <div className="property-price">2500.000DT</div>
-              <h3 className="property-title">Appartement Luxueux</h3>
-              <p className="property-address">kantaoui, sousse</p>
-              <hr className="property-divider" />
-              <p className="property-description"></p>
-            </div>
-          </div>
+            <div className="image-wrapper">
+              <div
+                className="property-image"
+                style={{
+                  backgroundImage: `url(${image1})`,
+                }}
+              >
+                {/* Badge NEW */}
+                <span className="property-badge">FOR sALE</span>
 
-          {/* Property Card 3 - Dupliquez et modifiez pour plus de propriétés */}
-          <div className="property-card">
-            <div
-              className="property-image"
-              style={{
-                backgroundImage: "url('img/properties/townhouse2.jpg')",
-              }}
-            ></div>
+                {/* Caractéristiques avec icônes */}
+                <div className="property-features">
+                  <span className="feature">
+                    <i className="fas fa-bed"></i> 2
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-bath"></i> 2
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-ruler-combined"></i> 120 sq ft
+                  </span>
+                  <button onClick={() => navigate(`/details/${property.id}`)}>
+                    Voir Détails
+                  </button>
+                </div>
+              </div>
+
+              {/* Type et prix */}
+
+              <div className="property-price">1.500.000DT</div>
+            </div>
+
             <div className="property-info">
-              <span className="property-type">FOR RENT</span>
-              <div className="property-price">800,000DT</div>
-              <h3 className="property-title">Studio Moderne</h3>
-              <p className="property-address">Rue orange Mounastir</p>
+              <h3 className="property-title">Individual Villa</h3>
+              <p className="property-address">Hergla, Cité Nozha</p>
               <hr className="property-divider" />
               <p className="property-description">
-                Intraeae nae hibendum laxist: Suspendisse
+                Ctte villa d'exception, située à seulement 150 m de la plage
+                dans le quartier prisé de Cité Nozha à Hergla.
+              </p>
+            </div>
+          </div>
+          {/* Property Card 2 */}
+          <div className="property-card">
+            <div className="image-wrapper">
+              <div
+                className="property-image"
+                style={{
+                  backgroundImage: `url(${image2})`,
+                }}
+              >
+                <span className="property-badge">FOR SALE</span>
+                <div className="property-features">
+                  <span className="feature">
+                    <i className="fas fa-bed"></i> 3
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-bath"></i> 2
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-ruler-combined"></i> 150 sq ft
+                  </span>
+                  <button onClick={() => navigate(`/details/${property.id}`)}>
+                    Voir Détails
+                  </button>
+                </div>
+              </div>
+              <div className="property-price">2.500.000DT</div>
+            </div>
+            <div className="property-info">
+              <h3 className="property-title">Appartement Luxueux</h3>
+              <p className="property-address">Kantaoui, Sousse</p>
+              <hr className="property-divider" />
+              <p className="property-description">
+                Un appartement haut standing avec vue sur la marina, situé au
+                cœur du prestigieux quartier touristique de Kantaoui.
+              </p>
+            </div>
+          </div>
+          {/* Property Card 3 */}
+          <div className="property-card">
+            <div className="image-wrapper">
+              <div
+                className="property-image"
+                style={{
+                  backgroundImage: `url(${image3})`,
+                }}
+              >
+                <span className="property-badge">FOR SALE</span>
+                <div className="property-features">
+                  <span className="feature">
+                    <i className="fas fa-bed"></i> 1
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-bath"></i> 1
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-ruler-combined"></i> 75 sq ft
+                  </span>
+                  <button onClick={() => navigate(`/details/${property.id}`)}>
+                    Voir Détails
+                  </button>
+                </div>
+              </div>
+              <div className="property-price">800.000DT</div>
+            </div>
+            <div className="property-info">
+              <h3 className="property-title">Studio Moderne</h3>
+              <p className="property-address">Rue Orange, Monastir</p>
+              <hr className="property-divider" />
+              <p className="property-description">
+                Ce studio moderne offre un espace compact mais élégant à
+                quelques pas de la mer, idéal pour célibataires ou étudiants.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="properties-grid">
+          {/* Property Card 4 */}
+          <div className="property-card">
+            <div className="image-wrapper">
+              <div
+                className="property-image"
+                style={{
+                  backgroundImage: `url(${image4})`,
+                }}
+              >
+                <span className="property-badge">FOR SALE</span>
+                <div className="property-features">
+                  <span className="feature">
+                    <i className="fas fa-bed"></i> 2
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-bath"></i> 1
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-ruler-combined"></i> 95 sq ft
+                  </span>
+                  <button onClick={() => navigate(`/details/${property.id}`)}>
+                    Voir Détails
+                  </button>
+                </div>
+              </div>
+              <div className="property-price">1.200.000DT</div>
+            </div>
+            <div className="property-info">
+              <h3 className="property-title">Appartement YOSRA</h3>
+              <p className="property-address">Nabeul</p>
+              <hr className="property-divider" />
+              <p className="property-description">
+                Un appartement lumineux avec balcon spacieux, parfait pour une
+                petite famille ou un couple.
+              </p>
+            </div>
+          </div>
+
+          {/* Property Card 5 */}
+          <div className="property-card">
+            <div className="image-wrapper">
+              <div
+                className="property-image"
+                style={{
+                  backgroundImage: `url(${image5})`,
+                }}
+              >
+                <span className="property-badge">FOR SALE</span>
+                <div className="property-features">
+                  <span className="feature">
+                    <i className="fas fa-bed"></i> 1
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-bath"></i> 1
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-ruler-combined"></i> 75 sq ft
+                  </span>
+                  <button onClick={() => navigate(`/details/${property.id}`)}>
+                    Voir Détails
+                  </button>
+                </div>
+              </div>
+              <div className="property-price">800.000DT</div>
+            </div>
+            <div className="property-info">
+              <h3 className="property-title">Studio Moderne</h3>
+              <p className="property-address">Rue Orange, Monastir</p>
+              <hr className="property-divider" />
+              <p className="property-description">
+                Ce studio moderne offre un espace compact mais élégant à
+                quelques pas de la mer, idéal pour célibataires ou étudiants.
+              </p>
+            </div>
+          </div>
+          {/* Property Card 6 */}
+          <div className="property-card">
+            <div className="image-wrapper">
+              <div
+                className="property-image"
+                style={{
+                  backgroundImage: `url(${image6})`,
+                }}
+              >
+                <span className="property-badge">FOR SALE</span>
+                <div className="property-features">
+                  <span className="feature">
+                    <i className="fas fa-bed"></i> 1
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-bath"></i> 1
+                  </span>
+                  <span className="feature">
+                    <i className="fas fa-ruler-combined"></i> 75 sq ft
+                  </span>
+                  <button onClick={() => navigate(`/details/${property.id}`)}>
+                    Voir Détails
+                  </button>
+                </div>
+              </div>
+              <div className="property-price">800.000DT</div>
+            </div>
+            <div className="property-info">
+              <h3 className="property-title">Studio Moderne</h3>
+              <p className="property-address">Rue Orange, Monastir</p>
+              <hr className="property-divider" />
+              <p className="property-description">
+                Ce studio moderne offre un espace compact mais élégant à
+                quelques pas de la mer, idéal pour célibataires ou étudiants.
               </p>
             </div>
           </div>
         </div>
       </section>
-      {/* Footer */}
-      <footer
-        className="bg-dark text-light sticky pt-5 pb-4"
-        style={{ margin: 0 }}
-      >
-        <div className="container">
-          <div className="row">
-            {/* Column 1 */}
-            <div className="col-md-3 mb-4">
-              <h2 className="text-white">HOMZ</h2>
-              <p>
-                At Homz, we are committed to providing exceptional service and
-                support.
-              </p>
-              <div className="d-flex">
-                <input
-                  type="email"
-                  className="form-control me-2"
-                  placeholder="Enter Your Email"
-                />
-                <button className="btn btn-outline-light">Discover More</button>
+      <div className="hero-section" ref={sectionRef}>
+        <div
+          className="hero-image"
+          style={{
+            backgroundImage: `url(${imagevideo})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <div className="hero-overlay">
+            <div className="hero-content">
+              <p1 className="typewriter-text">
+                ARE YOU LOOKING FOR A PLACE TO RENT?
+              </p1>
+              <p>Explore top rental properties in your preferred location.</p>
+              <div className="hero-divider">
+                <button className="search-button">SEARCH</button>
               </div>
-              <div className="social-icons">
-                <a href="https://facebook.com" aria-label="Facebook">
-                  <FaFacebookF />
-                </a>
-                <a href="https://instagram.com" aria-label="Instagram">
-                  <FaInstagram />
-                </a>
-                <a href="https://linkedin.com" aria-label="LinkedIn">
-                  <FaLinkedinIn />
-                </a>
-                <a href="https://youtube.com" aria-label="YouTube">
-                  <FaYoutube />
-                </a>
-              </div>
-            </div>
-
-            {/* Column 2 */}
-            <div className="col-md-3 mb-4">
-              <h5>Quick Links</h5>
-              <ul className="list-unstyled">
-                <li>
-                  <a href="/about-us" className="text-light">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="/properties" className="text-light">
-                    Properties
-                  </a>
-                </li>
-                <li>
-                  <a href="/listings" className="text-light">
-                    Listings
-                  </a>
-                </li>
-                <li>
-                  <a href="/blog-news" className="text-light">
-                    Blog News
-                  </a>
-                </li>
-                <li>
-                  <a href="/contact" className="text-light">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3 */}
-            <div className="col-md-3 mb-4">
-              <h5>Legal</h5>
-              <ul className="list-unstyled">
-                <li>
-                  <a href="/apartment" className="text-light">
-                    Apartment
-                  </a>
-                </li>
-                <li>
-                  <a href="/my-house" className="text-light">
-                    My House
-                  </a>
-                </li>
-                <li>
-                  <a href="/interiors" className="text-light">
-                    Interiors
-                  </a>
-                </li>
-                <li>
-                  <a href="/square-area" className="text-light">
-                    Square Area
-                  </a>
-                </li>
-                <li>
-                  <a href="/terms-and-conditions" className="text-light">
-                    Terms & Conditions
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 4 */}
-            <div className="col-md-3 mb-4">
-              <h5>Contact</h5>
-              <ul className="list-unstyled">
-                <li>
-                  <FaMapMarkerAlt className="me-2" />
-                  <a
-                    href="https://maps.google.com/?q=Akouda,Sousse,Tunisia"
-                    className="text-light"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Akouda, Sousse, Tunisia
-                  </a>
-                </li>
-                <li>
-                  <FaPhone className="me-2" />
-                  <a href="tel:+21612345678" className="text-light">
-                    +216 12 345 678
-                  </a>
-                </li>
-                <li>
-                  <FaEnvelope className="me-2" />
-                  <a
-                    href="mailto:contact@agenceimmobilier.com"
-                    className="text-light"
-                  >
-                    contact@agenceimmobilier.com
-                  </a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
-      </footer>
+      </div>
+      <section className="testimonials">
+        {" "}
+        <h2 className="testimonials-title">CLIENT TESTIMONIALS</h2>{" "}
+        <p className="testimonials-subtitle"> Happy homeowners speak </p>{" "}
+        <div className="testimonials-container">
+          {visibleTestimonials.map((testimonial) => (
+            <div className="testimonial" key={testimonial.id}>
+              <h3 className="testimonial-heading">{testimonial.name}</h3>
+              <p className="testimonial-text">{testimonial.content}</p>
+              <div className="testimonial-footer">
+                <img
+                  src={testimonial.photo}
+                  alt={testimonial.name}
+                  className="testimonial-avatar"
+                />
+                <p className="testimonial-name">
+                  {testimonial.name}, <span>{testimonial.role}</span>
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="testimonial-nav">
+          <button className="testimonial-btn" onClick={handlePrev}>
+            ❮
+          </button>
+          <button className="testimonial-btn" onClick={handleNext}>
+            ❯
+          </button>
+        </div>
+      </section>
+
+      <div className="agent-profile-container">
+        <div className="text-content">
+          <h1>Akrem Maatouk</h1>
+          <h2>Real Estate Consultant</h2>
+
+          <p className="description">
+            With over a decade of experience in Tunisia's dynamic property
+            market, Akrem Maatouk provides expert guidance for buying, selling,
+            or renting homes, apartments, and commercial spaces.
+          </p>
+
+          <div className="contact-details">
+            <div className="contact-item">
+              <span className="icon">📞</span>
+              <span>+216 12 345 678</span>
+            </div>
+            <div className="contact-item">
+              <span className="icon">✉️</span>
+              <span>contact@scott-realestate.tn</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="image-container">
+          <img
+            src={jeremyScottImage}
+            alt="Jeremy Scott"
+            className="profile-image"
+          />
+        </div>
+      </div>
+
     </div>
   );
 };

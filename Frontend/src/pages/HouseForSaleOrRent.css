@@ -1,30 +1,57 @@
-.features-container {
-    display: flex;
-    align-items: center; /* Aligne verticalement les éléments au centre */
-    justify-content: flex-start; /* Aligne les éléments à gauche */
-    padding: 20px;
-    background-color: #f9f9f9;
-  }
+.hero-section {
   
-  .features-title {
-    font-size: 24px;
-    margin: 0; /* Supprime la marge par défaut du h2 */
-    margin-right: 20px; /* Ajoute un espace entre le titre et le bouton */
-  }
-  
-  .browse-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #164D59;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .browse-button:hover {
-    background-color: #2a3036;
-    
+  height: 100vh; 
+  position: relative;
+  margin-left: -190px;
+  margin-right: -170px;
+}
 
-  }
-  
+.property-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* important */
+  height: 100%;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.property-card:hover {
+  transform: scale(1.05); 
+}
+
+.properties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+
+.property-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Right */
+  margin-top: auto; /* Push to bottom */
+}
+
+.search-btn {
+  background-color: #4f46e5;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #4338ca;
+}
