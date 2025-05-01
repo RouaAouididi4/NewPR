@@ -34,7 +34,6 @@ router.post('/upload', upload.array('photos', 10), (req, res) => {
     res.status(500).json({ message: 'Échec du téléchargement.' });
   }
 });
-
 // Route pour obtenir les photos téléchargées
 router.get("/photos", (req, res) => {
   const uploadDir = path.join(__dirname, '..', 'uploads', 'photos');

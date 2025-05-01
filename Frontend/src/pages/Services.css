@@ -96,16 +96,24 @@
 
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
   margin-top: 30px;
 }
 
 .service-box {
   background-color: #f3e1cd;
   padding: 15px;
-}
 
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+.service-box:hover {
+  transform: translateY(-5px);
+}
 .service-box h4 {
   background-color: #1c1c1c;
   color: white;

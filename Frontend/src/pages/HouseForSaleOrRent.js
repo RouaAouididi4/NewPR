@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./PropertyByLocation.css";
+import "./HouseForSaleOrRent.css";
 import image1 from "./images/Listing1.jpg";
 import image2 from "./images/Listing2.jpg";
 import image3 from "./images/Listing3.jpg";
