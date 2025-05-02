@@ -1,25 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
-  FaYoutube,
-  FaMapMarkerAlt,
-  FaPhone,
-  FaGoogle,
-  FaEnvelope,
-} from "react-icons/fa";
-import './Signup.css';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { FaPhone, FaGoogle } from "react-icons/fa";
+import "./Signup.css";
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
+  const [touched, setTouched] = useState({});
+  const [errors, setErrors] = useState({});
+
   const [formData, setFormData] = useState({
-    fullName: "",
+    FullName: "",
     email: "",
     password: "",
-    repeatPassword: "",
+    confirmPassword: "",
   });
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const togglePassword = () => setShowPassword(!showPassword);
@@ -29,13 +24,20 @@ function Signup() {
     "img/bg-img/hero3.jpg",
   ];
 
-  const handlePrev = () => {
-    setStartIndex((prev) =>
-      prev === 0
-        ? testimonial.length - testimonialsPerPage
-        : prev - testimonialsPerPage
-    );
+  const goToPrevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
+
+  const goToNextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % images.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleNext = () => {
     setStartIndex((prev) =>
@@ -43,14 +45,6 @@ function Signup() {
         ? 0
         : prev + testimonialsPerPage
     );
-  };
-
-  const goToPrevSlide = () => {
-    setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
-
-  const goToNextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
   };
 
   useEffect(() => {
@@ -69,9 +63,66 @@ function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleBlur = (e) => {
+    setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+  };
+
+  const isEmpty = (field) => !formData[field] && touched[field];
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // handle form submission logic
+    setErrors({});
+    const newTouched = {
+      FullName: true,
+      email: true,
+      password: true,
+      confirmPassword: true,
+    };
+    setTouched(newTouched);
+
+    const formErrors = {};
+    if (!formData.FullName) formErrors.FullName = "Full Name is required.";
+    if (!formData.email) formErrors.email = "Email is required.";
+    if (!formData.password) formErrors.password = "Password is required.";
+    if (!formData.confirmPassword)
+      formErrors.confirmPassword = "Confirm Password is required.";
+    if (
+      formData.password &&
+      formData.confirmPassword &&
+      formData.password !== formData.confirmPassword
+    ) {
+      formErrors.confirmPassword = "Passwords must match.";
+    }
+
+    setErrors(formErrors);
+    if (Object.keys(formErrors).length > 0) return;
+
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          FullName: formData.FullName,
+          email: formData.email,
+          password: formData.password,
+          confirmPassword: formData.confirmPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Account created successfully!");
+        window.location.href = "/login";
+      } else {
+        alert(data.message || "Something went wrong.");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      alert("Signup failed. Please try again later.");
+    }
   };
 
   return (
@@ -81,7 +132,7 @@ function Signup() {
           <div
             className="single-hero-slide"
             style={{
-              backgroundImage: `url(${images[currentIndex]})`,
+              backgroundImage: ` url(${images[currentIndex]})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -183,19 +234,23 @@ function Signup() {
 
             <form className="signup-form" onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="fullName" className="form-label">
+                <label htmlFor="FullName" className="form-label">
                   Full name*
                 </label>
                 <input
                   type="text"
-                  className="form-control"
-                  id="fullName"
-                  name="fullName"
+                  className={`"form-control" ${errors.FullName ? "border-danger" : ""}`}
+                  id="FullName"
+                  name="FullName"
                   placeholder="Your name"
-                  value={formData.fullName}
+                  value={formData.FullName}
                   onChange={handleChange}
-                  required
+                  onBlur={handleBlur}
+                  style={{ borderColor: isEmpty("FullName") ? "red" : "" }}
                 />
+                {errors.FullName && (
+                  <small className="text-danger">{errors.FullName}</small>
+                )}
               </div>
 
               <div className="form-group">
@@ -204,14 +259,18 @@ function Signup() {
                 </label>
                 <input
                   type="email"
-                  className="form-control"
+                  className={`form-control ${errors.email ? "border-danger" : ""}`}
                   id="email"
                   name="email"
                   placeholder="Your email address"
                   value={formData.email}
                   onChange={handleChange}
-                  required
+                  onBlur={handleBlur}
+                  style={{ borderColor: isEmpty("email") ? "red" : "" }}
                 />
+                {errors.email && (
+                  <small className="text-danger">{errors.email}</small>
+                )}
               </div>
 
               <div className="form-group">
@@ -219,31 +278,54 @@ function Signup() {
                   Password*
                 </label>
                 <input
-                  type="password"
-                  className="form-control"
+                  type={showPassword ? "text" : "password"}
+                  className={`form-control ${errors.password ? "border-danger" : ""}`}
                   id="password"
                   name="password"
                   placeholder="Your password"
                   value={formData.password}
                   onChange={handleChange}
-                  required
+                  onBlur={handleBlur}
+                  style={{ borderColor: isEmpty("password") ? "red" : "" }}
                 />
+                {errors.password && (
+                  <small className="text-danger">{errors.password}</small>
+                )}
               </div>
 
               <div className="form-group">
-                <label htmlFor="repeatPassword" className="form-label">
-                  Repeat password*
+                <label htmlFor="confirmPassword" className="form-label">
+                  Confirm password*
                 </label>
                 <input
-                  type="password"
-                  className="form-control"
-                  id="repeatPassword"
-                  name="repeatPassword"
+                  type={showPassword ? "text" : "password"}
+                  className={`form-control ${
+                    errors.confirmPassword ? "border-danger" : ""
+                  }`}
+                  id="confirmPassword"
+                  name="confirmPassword"
                   placeholder="Your password"
-                  value={formData.repeatPassword}
+                  value={formData.confirmPassword}
                   onChange={handleChange}
-                  required
+                  onBlur={handleBlur}
+                  style={{
+                    borderColor: isEmpty("confirmPassword") ? "red" : "",
+                  }}
                 />
+                {errors.confirmPassword && (
+                  <small className="text-danger">
+                    {errors.confirmPassword}
+                  </small>
+                )}
+              </div>
+              <div className="form-group text-end">
+                <button
+                  type="button"
+                  className="btn btn-sm btn-outline-secondary"
+                  onClick={togglePassword}
+                >
+                  {showPassword ? "Hide Password" : "Show Password"}
+                </button>
               </div>
 
               <button type="submit" className="signup-btn">
@@ -268,8 +350,6 @@ function Signup() {
           </div>
         </div>
       </div>
-
-      
     </div>
   );
 }

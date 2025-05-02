@@ -1,19 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 import logoImage from "../pages/images/8.png"; // Chemin relatif correct
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const isLoggedIn = !!localStorage.getItem("token");
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -92,13 +90,33 @@ const Navbar = () => {
             </a> */}
           </div>
           <div className="auth-links">
-            <a href="/login" className="menu-item">
-              LOGIN
-            </a>
-            <a href="/signup" className="menu-item signup">
-              SIGNUP
-            </a>
+            {user ? (
+              <>
+                <Link to="/profile" className="menu-item">
+                  PROFILE
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    window.location.href = "/";
+                  }}
+                  className="menu-item logout-btn"
+                >
+                  LOGOUT
+                </button>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="menu-item">
+                  LOGIN
+                </Link>
+                <Link to="/signup" className="menu-item signup">
+                  SIGNUP
+                </Link>
+              </>
+            )}
           </div>
+
           {/* Bouton Menu Mobile */}
           <button className="mobile-menu-btn" onClick={toggleMobileMenu}>
             ☰
@@ -114,7 +132,18 @@ const Navbar = () => {
           right: 0;
           z-index: 1000;
         }
+        .logout-btn {
+          background-color: #f44336;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          padding: 8px 15px;
+          cursor: pointer;
+        }
 
+        .logout-btn:hover {
+          background-color: #d32f2f;
+        }
         .top-bar {
           background-color: #000;
           color: white;

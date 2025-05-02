@@ -1,5 +1,8 @@
+// App.js
 import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/auth";
+
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -16,22 +19,28 @@ import HouseForSaleOrRent from "./pages/HouseForSaleOrRent";
 import Details from "./pages/Details";
 import Upload from "./pages/upload";
 import Footer from "./components/Footer";
-
-
+import Profile from "./pages/Profile";
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <Preloader />
       <NavBar />
       <div className="app-container p-4 bg-gray-100">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/About" element={<About />} />
           <Route path="/Property-Listing" element={<PropertyListing />} />
           <Route path="/Post" element={<Post />} />
-          <Route path="/House-For-Sale-Or-Rent" element={<HouseForSaleOrRent />} />
-          <Route path="/Property-By-Location" element={<PropertyByLocation />} />
+          <Route
+            path="/House-For-Sale-Or-Rent"
+            element={<HouseForSaleOrRent />}
+          />
+          <Route
+            path="/Property-By-Location"
+            element={<PropertyByLocation />}
+          />
           <Route path="/services" element={<Services />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
@@ -39,11 +48,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/details/:id" element={<Details />} />
           <Route path="/upload" element={<Upload />} />
-
         </Routes>
       </div>
-     <Footer/>
-    </>
+      <Footer />
+    </AuthProvider>
   );
 }
 

@@ -1,4 +1,4 @@
-const User = require("../Models/UserModel");
+const User = require("../Models/User");
 const catchAsync = require("../Utils/CatchAsync");
 
 // Get all users
@@ -13,17 +13,76 @@ exports.getUserById = catchAsync(async (req, res, next) => {
   res.status(200).json({ status: "success", data: user });
 });
 
-// Update a user
-exports.updateUser = catchAsync(async (req, res, next) => {
-  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-  res.status(200).json({ status: "success", data: updatedUser });
-});
+// Get User Profile
+exports.getProfile = async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-// Delete a user
-exports.deleteUser = catchAsync(async (req, res, next) => {
-  await User.findByIdAndDelete(req.params.id);
-  res.status(204).json({ status: "success", data: null });
-});
+    res.status(200).json({
+      FullName: user.FullName,
+      email: user.email,
+      phone: user.phone,
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching profile" });
+  }
+};
+
+// Update User Profile
+exports.updateUser = async (req, res) => {
+  const { FullName, phone } = req.body;
+
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.user.id,
+      { FullName, phone },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Profile updated successfully",
+      user: {
+        FullName: user.FullName,
+        email: user.email,
+        phone: user.phone,
+      },
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Error updating profile" });
+  }
+};
+
+// Change User Password
+exports.changePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Incorrect current password" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 12);
+    user.password = hashedPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error changing password" });
+  }
+};
+
+// Delete User Account
+exports.deleteAccount = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.user.id);
+    res.status(200).json({ message: "Account deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error deleting account" });
+  }
+};
