@@ -31,10 +31,11 @@ const AuthMiddleware = async (req, res, next) => {
       });
     }
 
-    // 4. Ajout des données à la requête
+    // 4. Ajout des données utilisateur à la requête
     req.user = user;
-    next();
+    next(); // Passer au middleware suivant
   } catch (err) {
+    console.error("Erreur lors de la vérification du token:", err);
     return res.status(401).json({
       success: false,
       message: "Session invalide ou expirée. Veuillez vous reconnecter",

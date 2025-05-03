@@ -2,9 +2,14 @@ const User = require("../Models/User.js");
 const catchAsync = require("./../Utils/catchAsync.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 // User Signup (Registration)
 exports.signup = catchAsync(async (req, res, next) => {
   const { FullName, email, password, confirmPassword } = req.body;
+
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: "Passwords do not match" });
+  }
 
   const existingUser = await User.findOne({ email });
   if (existingUser) {
@@ -19,6 +24,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     email,
     password: hashedPassword,
   });
+  const token = jwt.sign({ id: user._id }, "YosraRoua", { expiresIn: "1h" });
 
   res.status(201).json({
     message: "User created ✅",
@@ -26,17 +32,21 @@ exports.signup = catchAsync(async (req, res, next) => {
     FullName: user.FullName,
     email: user.email,
     phone: user.phone,
+    token,
   });
 });
 
 // User Login (Authentication)
-exports.login = catchAsync(async (req, res) => {
+exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+password");
   if (!user) {
     return res.status(400).json({ message: "User not found" });
   }
+
+  console.log("Password from request body:", password);
+  console.log("Password from database:", user.password);
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {

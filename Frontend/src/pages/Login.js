@@ -96,6 +96,7 @@ const Login = () => {
       } else {
         setError(data.message || "Login failed");
       }
+      console.log("Login success:", response.data);
     } catch (err) {
       setError("An error occurred. Please try again.");
     }

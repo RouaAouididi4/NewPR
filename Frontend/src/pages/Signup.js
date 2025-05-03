@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ErrorAlert from "../components/ErrorAlert";
 import { FaPhone, FaGoogle } from "react-icons/fa";
 import "./Signup.css";
 
@@ -7,7 +8,7 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState({});
   const [errors, setErrors] = useState({});
-
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     FullName: "",
     email: "",
@@ -114,14 +115,15 @@ function Signup() {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Account created successfully!");
+        setError(data.message || "Account created successfully!");
+        localStorage.setItem("token", data.token);
         window.location.href = "/login";
       } else {
         alert(data.message || "Something went wrong.");
       }
     } catch (err) {
       console.error("Error:", err);
-      alert("Signup failed. Please try again later.");
+      setError("Signup failed. Please try again later.");
     }
   };
 
